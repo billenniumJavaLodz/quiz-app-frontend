@@ -7,6 +7,8 @@ import { FooterComponent } from './components/footer/footer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { MaterialModule } from './modules/material/material.module'
+import { httpInterceptorProviders } from './interceptors/http-interceptor-providers';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,7 @@ import { MaterialModule } from './modules/material/material.module'
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
