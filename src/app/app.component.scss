@@ -1,8 +1,9 @@
 .main-container {
   width: 80%;
-  margin: 0 auto;
-  margin-top: 20vh;
+  margin: 4vh auto 80px;
+
+  .content-container {
+    justify-content: center;
+  }
 }
-.content-container {
-  justify-content: center;
-}
+

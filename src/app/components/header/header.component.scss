@@ -1,11 +1,16 @@
-.mat-toolbar.mat-warn {
-  background: #fff;
-  color: #000;
+$header-toolbar-background-color: #fff !important;
+$header-toolbar-color: #000000 !important;
+
+.mat-toolbar {
+  background: $header-toolbar-background-color;
+  color: $header-toolbar-color;
   box-shadow: 0 3px 3px -3px darkslategrey;
-}
-.spacer {
-  flex: 1 1 auto;
-}
-img {
-  height: 40px;
+
+  img {
+    height: 40px;
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
 }
