@@ -1,13 +1,17 @@
-.mat-toolbar.mat-primary {
-  background: #ededeb;
-  color: #000;
-  font-size: 15px;
-}
+$footer-toolbar-background-color: #ededeb;
+$footer-toolbar-font-color: #000;
+$footer-toolbar-font-size: 15px;
+
 .footer {
-  height: 30px;
-  position: absolute;
+  background: $footer-toolbar-background-color;
+  color: $footer-toolbar-font-color ;
+  font-size: $footer-toolbar-font-size ;
+  position: fixed;
   bottom: 0;
+
+  .content {
+    justify-content: center;
+  }
 }
-.footer .content {
-  justify-content: center;
-}
+
+
