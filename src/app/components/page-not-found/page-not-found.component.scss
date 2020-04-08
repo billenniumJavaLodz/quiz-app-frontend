@@ -1,0 +1,65 @@
+$page-not-found-error-container-height: 25vw;
+$page-not-found-error-container-sticker-max-width: 13%;
+.content {
+  width: 100%;
+  margin-top: 5vh;
+
+  .sticky {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .error-container {
+      height: $page-not-found-error-container-height;
+      flex: 0 1 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+
+      h1 {
+        font-weight: bold;
+        font-size: $page-not-found-error-container-height;
+      }
+
+      .sticker-1 {
+        position: absolute;
+        max-width: $page-not-found-error-container-sticker-max-width;
+        left: 93%;
+        top: 52%;
+      }
+
+      .sticker-2 {
+        position: absolute;
+        max-width: $page-not-found-error-container-sticker-max-width;
+        top: 5%;
+        transform: rotate(20deg);
+      }
+
+      .sticker-3 {
+        position: absolute;
+        max-width: $page-not-found-error-container-sticker-max-width;
+        top: 58%;
+        right: 95%;
+      }
+    }
+  }
+
+  .info-container {
+    text-align: justify;
+    display: flex;
+    justify-content: center;
+
+    p {
+      font-size: 2vw;
+      text-align: center;
+      line-height: 200%;
+    }
+  }
+}
+
+
+
+
+
+
