@@ -10,7 +10,7 @@ import {MaterialModule} from './modules/material/material.module'
 import {httpInterceptorProviders} from './interceptors/http-interceptor-providers';
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
-
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
