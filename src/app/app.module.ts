@@ -9,8 +9,11 @@ import {HeaderComponent} from './components/header/header.component';
 import {MaterialModule} from './modules/material/material.module'
 import {httpInterceptorProviders} from './interceptors/http-interceptor-providers';
 import {HomePageComponent} from './components/home-page/home-page.component';
-import {PageNotFoundComponent} from "./components/page-not-found/page-not-found.component";
+import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {HttpClientModule} from '@angular/common/http';
+import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
+import {FormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -18,14 +21,16 @@ import {HttpClientModule} from '@angular/common/http';
     FooterComponent,
     HeaderComponent,
     HomePageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    QuizPageComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]

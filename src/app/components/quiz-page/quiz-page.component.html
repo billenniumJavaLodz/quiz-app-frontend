@@ -1,0 +1,11 @@
+<div class="content">
+  <div class="question">
+    <h1>{{quizModel.question.text}}</h1>
+  </div>
+  <mat-radio-group [(ngModel)]="selectedAnswer" class="form">
+    <mat-radio-button  class="answer" *ngFor="let answer of quizModel.question.answers" [value]="answer" (click)="select(answer)">
+      {{answer.text}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <button  mat-flat-button color="primary" (click)="submit()"  [disabled]="selectedAnswer.id === undefined">Zatwierdź</button>
+</div>
