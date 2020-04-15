@@ -1,9 +1,9 @@
 <div class="content">
   <div class="info-container">
-    <h1>Witaj {{user.name}} w stażowym quize Billennium</h1>
+    <h1>Witaj {{user.email}} w stażowym quize Billennium</h1>
   </div>
-  <div class="img-container" >
+  <div class="img-container">
     <img src="assets/img/squad.png">
-    <button mat-flat-button color="primary">Rozpocznij</button>
+    <button mat-flat-button color="primary" (click)="startQuiz()">Rozpocznij</button>
   </div>
 </div>
