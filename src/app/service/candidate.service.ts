@@ -1,21 +1,21 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {UserModel} from "../models/user-model";
+import {CandidateModel} from "../models/candidate-model";
 import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class CandidateService {
 
-  userUrl = "user/";
+  userUrl = 'getCandidate/';
 
   constructor(private httpClient: HttpClient) {
   }
 
-  getUser(userId: string): Observable<UserModel> {
-    return this.httpClient.get<UserModel>(environment.baseUrl + this.userUrl + userId);
+  getUser(userId: string): Observable<CandidateModel> {
+    return this.httpClient.get<CandidateModel>(environment.baseUrl + this.userUrl + userId);
   }
 
 }

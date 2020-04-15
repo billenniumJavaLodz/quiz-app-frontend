@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {UserService} from "../../service/user.service";
-import {UserModel} from "../../models/user-model";
+import {CandidateService} from "../../service/candidate.service";
+import {CandidateModel} from "../../models/candidate-model";
 
 @Component({
   selector: 'app-home-page',
@@ -11,15 +11,20 @@ import {UserModel} from "../../models/user-model";
 export class HomePageComponent implements OnInit {
 
   userId: string;
-  user: UserModel;
+  user: CandidateModel;
 
-  constructor(private route: ActivatedRoute, private  userService: UserService) {
+  constructor(private route: ActivatedRoute, private  candidateService: CandidateService) {
   }
 
   ngOnInit(): void {
-    this.userId = this.route.snapshot.paramMap.get("id");
-    this.userService.getUser(this.userId).subscribe(data => {
+    this.userId = this.route.snapshot.paramMap.get('id');
+    this.candidateService.getUser(this.userId).subscribe(data => {
       this.user = data;
+      sessionStorage.setItem('BILLENNIUM_CANDIDATE_ID', this.user.id);
     });
+  }
+
+  startQuiz() {
+
   }
 }
