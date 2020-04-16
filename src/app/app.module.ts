@@ -11,8 +11,9 @@ import {httpInterceptorProviders} from './interceptors/http-interceptor-provider
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {HttpClientModule} from '@angular/common/http';
-import { QuizPageComponent } from './components/quiz-page/quiz-page.component';
+import {QuizPageComponent} from './components/quiz-page/quiz-page.component';
 import {FormsModule} from '@angular/forms';
+import {EndQuizComponent} from './components/end-quiz/end-quiz.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {FormsModule} from '@angular/forms';
     HeaderComponent,
     HomePageComponent,
     PageNotFoundComponent,
-    QuizPageComponent
+    QuizPageComponent,
+    EndQuizComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,4 +37,5 @@ import {FormsModule} from '@angular/forms';
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
