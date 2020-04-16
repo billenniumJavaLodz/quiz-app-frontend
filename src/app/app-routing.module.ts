@@ -3,11 +3,12 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from './components/home-page/home-page.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {QuizPageComponent} from './components/quiz-page/quiz-page.component';
+import {EndQuizComponent} from "./components/end-quiz/end-quiz.component";
 
 
 const routes: Routes = [
     {
-      path: 'user/:id',
+      path: 'candidate/:id',
       component: HomePageComponent,
       pathMatch: 'full',
 
@@ -17,11 +18,14 @@ const routes: Routes = [
       pathMatch: 'full',
 
     }, {
+      path: 'thank-you',
+      component: EndQuizComponent,
+      pathMatch: 'full'
+    }, {
       path: '**',
       component: PageNotFoundComponent,
       pathMatch: 'full'
     }
-
   ]
 ;
 

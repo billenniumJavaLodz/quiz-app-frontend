@@ -1,7 +1,6 @@
 import {AnswerModel} from './answer-model';
 
 export class AnswerDto {
-  id: number;
+  answerId: number;
   questionId: number;
-  answer: AnswerModel;
 }

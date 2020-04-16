@@ -3,6 +3,8 @@ import {QuizDefinitionModel} from 'src/app/models/quiz-definition-model';
 
 import {AnswerDto} from '../../models/answer-dto';
 import {AnswerModel} from '../../models/answer-model';
+import {QuizService} from "../../service/quiz.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -12,15 +14,23 @@ import {AnswerModel} from '../../models/answer-model';
 })
 export class QuizPageComponent implements OnInit {
 
-  quizModel: QuizDefinitionModel;
+  SESSION_STORAGE_USER_ID = 'BILLENNIUM_CANDIDATE_ID';
+
+  response: QuizDefinitionModel;
   selectedAnswer = new AnswerModel();
-  answerToSend = new AnswerDto();
+  request = new AnswerDto();
 
 
-  constructor() {
+  constructor(private quizService: QuizService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.prepareInitRequestBody();
+    this.quizService.saveAndLoadQuestions(sessionStorage.getItem(this.SESSION_STORAGE_USER_ID), this.request)
+      .subscribe(data => {
+        this.response = data;
+      });
   }
 
 
@@ -28,10 +38,21 @@ export class QuizPageComponent implements OnInit {
     this.selectedAnswer = item;
   }
 
+  prepareInitRequestBody() {
+    this.request.answerId = null;
+    this.request.questionId = null;
+  }
+
   submit() {
-    this.answerToSend.id = this.quizModel.id;
-    this.answerToSend.questionId = this.quizModel.question.id;
-    this.answerToSend.answer = this.selectedAnswer;
-    //todo submit answer and move to quiz page
+    this.request.questionId = this.response.question.id;
+    this.request.answerId = this.selectedAnswer.id;
+
+    this.quizService.saveAndLoadQuestions(sessionStorage.getItem(this.SESSION_STORAGE_USER_ID), this.request).subscribe(data => {
+      this.selectedAnswer = new AnswerModel();
+      this.response = data;
+      if (this.response.id === null) {
+        this.router.navigate(['thank-you']);
+      }
+    });
   }
 }
