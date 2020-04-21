@@ -6,13 +6,11 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./end-quiz.component.scss']
 })
 export class EndQuizComponent implements OnInit {
-  SESSION_STORAGE_USER_ID = 'BILLENNIUM_CANDIDATE_ID';
 
   constructor() {
   }
 
   ngOnInit(): void {
-    sessionStorage.setItem(this.SESSION_STORAGE_USER_ID, '');
   }
 
 }

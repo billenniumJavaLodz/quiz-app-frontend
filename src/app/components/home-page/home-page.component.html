@@ -4,6 +4,8 @@
   </div>
   <div class="billennium-squad-img-container">
     <img src="assets/img/squad.png">
-    <button mat-flat-button color="primary" routerLink="/quiz">Rozpocznij</button>
+    <button *ngIf="user.quizStatus === QUIZ_READY_STATUS" color="primary" mat-flat-button routerLink="/quiz">
+      Rozpocznij
+    </button>
   </div>
 </div>
