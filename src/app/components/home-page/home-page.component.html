@@ -7,5 +7,6 @@
     <button *ngIf="user.quizStatus === QUIZ_READY_STATUS" color="primary" mat-flat-button routerLink="/quiz">
       Rozpocznij
     </button>
+    <h1 *ngIf="result !== undefined">Twój wynik to : {{result.scoredPoints}}/{{result.totalPoints}} </h1>
   </div>
 </div>

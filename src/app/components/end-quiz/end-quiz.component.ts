@@ -1,4 +1,8 @@
 import {Component, OnInit} from '@angular/core';
+import {ResultService} from '../../service/result.service';
+import {SessionStorageService} from '../../service/session.storage.service';
+import {ResultModel} from '../../models/result.model';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-end-quiz',
@@ -7,10 +11,19 @@ import {Component, OnInit} from '@angular/core';
 })
 export class EndQuizComponent implements OnInit {
 
-  constructor() {
+  result: ResultModel;
+
+  constructor(private resultService: ResultService,
+              private sessionStorageService: SessionStorageService,
+              private  router: Router) {
   }
 
   ngOnInit(): void {
+    if (this.sessionStorageService.getUUID() === null) {
+      this.router.navigate(['']);
+    }
+    this.resultService.getCandidateResult(this.sessionStorageService.getUUID()).subscribe(data => {
+      this.result = data;
+    });
   }
-
 }
