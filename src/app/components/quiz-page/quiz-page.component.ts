@@ -15,6 +15,7 @@ import {SessionStorageService} from '../../service/session.storage.service';
 export class QuizPageComponent implements OnInit, OnDestroy {
   DEFAULT_TIMER = -1;
   ANSWER_TIME_OUT = 0;
+  QUIZ_READY_STATUS = 'READY';
   response: QuizDefinitionModel;
   selectedAnswer = new AnswerModel();
   request = new AnswerDto();
@@ -29,7 +30,7 @@ export class QuizPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.timeToAnswer = this.sessionStorageService.getTimer();
-    if (this.sessionStorageService.getQuestion() === null) {
+    if (this.sessionStorageService.getQuestion() === null && this.sessionStorageService.getQuizStatus() === this.QUIZ_READY_STATUS) {
       this.sendData(null, null);
     } else {
       this.response = this.sessionStorageService.getQuestion();
@@ -52,7 +53,7 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sessionStorageService.clearStorage();
+    this.quizService.endQuiz(this.response.id);
     this.stopTimer();
   }
 
