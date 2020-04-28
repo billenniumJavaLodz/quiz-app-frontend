@@ -14,6 +14,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {QuizPageComponent} from './components/quiz-page/quiz-page.component';
 import {FormsModule} from '@angular/forms';
 import {EndQuizComponent} from './components/end-quiz/end-quiz.component';
+import { ResultListComponent } from './components/result-list/result-list.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import {EndQuizComponent} from './components/end-quiz/end-quiz.component';
     PageNotFoundComponent,
     QuizPageComponent,
     EndQuizComponent,
+    ResultListComponent,
   ],
   imports: [
     BrowserModule,
