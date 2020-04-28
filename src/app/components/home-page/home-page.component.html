@@ -1,12 +1,12 @@
 <div class="content">
   <div class="info-container">
-    <h1>Witaj {{user.email}} w stażowym quize Billennium</h1>
+    <h1>Witaj {{user.email}} w stażowym quize Billennium.</h1>
   </div>
   <div class="billennium-squad-img-container">
     <img src="assets/img/squad.png">
     <button *ngIf="user.quizStatus === QUIZ_READY_STATUS" color="primary" mat-flat-button routerLink="/quiz">
       Rozpocznij
     </button>
-    <h1 *ngIf="result !== undefined">Twój wynik to : {{result.scoredPoints}}/{{result.totalPoints}} </h1>
+    <h1 *ngIf="result !== undefined">Twój wynik to : {{score}}%</h1>
   </div>
 </div>

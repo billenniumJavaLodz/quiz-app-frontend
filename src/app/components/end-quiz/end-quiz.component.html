@@ -1,8 +1,10 @@
 <div class="content">
-  <h1>Dziękujemy za roziwązanie quizu.</h1>
-  <h1>Do zobaczenia.</h1>
+  <span>
+    <h1>Dziękujemy za roziwązanie quizu.</h1>
+    <h1>Do zobaczenia.</h1>
+  </span>
   <div class="billennium-squad-img-container">
     <img src="assets/img/squad.png">
   </div>
-  <h1 *ngIf="result !== undefined">Twój wynik to : {{result.scoredPoints}}/{{result.totalPoints}} </h1>
+  <h1 *ngIf="result !== undefined">Twój wynik to : {{score}}% </h1>
 </div>
