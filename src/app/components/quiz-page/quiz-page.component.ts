@@ -13,13 +13,12 @@ import {SessionStorageService} from '../../service/session.storage.service';
   styleUrls: ['./quiz-page.component.scss']
 })
 export class QuizPageComponent implements OnInit, OnDestroy {
-  DEFAULT_TIMER = -1;
   ANSWER_TIME_OUT = 0;
   QUIZ_READY_STATUS = 'READY';
   response: QuizDefinitionModel;
   selectedAnswer = new AnswerModel();
   request = new AnswerDto();
-  timeToAnswer = this.DEFAULT_TIMER;
+  timeToAnswer: number;
   timer: Subscription;
 
   constructor(private quizService: QuizService,
@@ -39,7 +38,6 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   }
 
   stopTimer() {
-    this.timeToAnswer = this.DEFAULT_TIMER;
     this.timer.unsubscribe();
   }
 
@@ -89,10 +87,7 @@ export class QuizPageComponent implements OnInit, OnDestroy {
       if (this.response.id === null) {
         this.router.navigate(['thank-you']);
       }
-
-      if (this.timeToAnswer === this.DEFAULT_TIMER) {
-        this.timeToAnswer = data.question.timeToAnswer;
-      }
+      this.timeToAnswer = data.question.timeToAnswer;
       this.runTimer();
     });
   }

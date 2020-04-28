@@ -15,10 +15,11 @@ export class HomePageComponent implements OnInit {
 
   QUIZ_READY_STATUS = 'READY';
   QUIZ_DONE_STATUS = 'DONE';
-  DEFAULT_TIMER = -1;
+  DEFAULT_TIMER = 0;
   userId: string;
   user: CandidateModel;
   result: ResultModel;
+  score: number;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -35,10 +36,10 @@ export class HomePageComponent implements OnInit {
       this.sessionStorageService.setQuizStatus(this.user.quizStatus);
       this.sessionStorageService.setTimer(this.DEFAULT_TIMER);
       this.sessionStorageService.setQuestion(null);
-
       if (this.sessionStorageService.getQuizStatus() === this.QUIZ_DONE_STATUS) {
         this.resultService.getCandidateResult(this.user.id).subscribe(resultData => {
           this.result = resultData;
+          this.score = (this.result.scoredPoints / this.result.totalPoints) * 100;
         });
       }
     });

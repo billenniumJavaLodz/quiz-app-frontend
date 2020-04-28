@@ -4,7 +4,7 @@ $home-page-mat-flat-background-color: #000 !important;
 
 .content {
   width: 100%;
-
+  margin-top: 15vh;
   .billennium-squad-img-container {
     .mat-flat-button {
       width: $home-page-mat-flat-button-width;
@@ -20,7 +20,7 @@ $home-page-mat-flat-background-color: #000 !important;
 
     h1 {
       text-align: center;
-      font-size: 6vh;
+      font-size: 30px;
     }
   }
 }

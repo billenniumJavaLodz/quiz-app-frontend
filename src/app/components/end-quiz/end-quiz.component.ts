@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class EndQuizComponent implements OnInit {
 
   result: ResultModel;
+  score: number;
 
   constructor(private resultService: ResultService,
               private sessionStorageService: SessionStorageService,
@@ -24,6 +25,7 @@ export class EndQuizComponent implements OnInit {
     }
     this.resultService.getCandidateResult(this.sessionStorageService.getUUID()).subscribe(data => {
       this.result = data;
+      this.score = (this.result.scoredPoints / this.result.totalPoints) * 100;
     });
   }
 }
