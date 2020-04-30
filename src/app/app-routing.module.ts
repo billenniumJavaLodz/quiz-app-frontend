@@ -4,7 +4,7 @@ import {HomePageComponent} from './components/home-page/home-page.component';
 import {PageNotFoundComponent} from './components/page-not-found/page-not-found.component';
 import {QuizPageComponent} from './components/quiz-page/quiz-page.component';
 import {EndQuizComponent} from "./components/end-quiz/end-quiz.component";
-
+import {ResultListComponent} from "./components/result-list/result-list.component"
 
 const routes: Routes = [
     {
@@ -22,6 +22,10 @@ const routes: Routes = [
       component: EndQuizComponent,
       pathMatch: 'full'
     }, {
+      path: 'result',
+      component: ResultListComponent,
+      pathMatch: 'full'
+    },{
       path: '**',
       component: PageNotFoundComponent,
       pathMatch: 'full'

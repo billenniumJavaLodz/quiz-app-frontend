@@ -1,0 +1,13 @@
+.content {
+  width: 100%;
+
+  .filter {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+
+  .table {
+    overflow: auto;
+  }
+}

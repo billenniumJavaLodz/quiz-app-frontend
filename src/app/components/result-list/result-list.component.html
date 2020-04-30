@@ -1,0 +1,42 @@
+<div class="content">
+  <div class="filter">
+    <mat-form-field>
+      <input (keyup)="applyFilter($event.target.value)" matInput placeholder="Filter by Id , Email or QuizTitle">
+    </mat-form-field>
+    <div class="table">
+      <mat-table [dataSource]="tableData" matSort>
+
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.email}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="quizTitle">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>QuizTitle</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.quizTitle}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="scoredPoints">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Scored Points</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.scoredPoints}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="totalPoints">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Total Points</mat-header-cell>
+          <mat-cell *matCellDef="let row"> {{row.totalPoints}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+      </mat-table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
+  </div>
+</div>
