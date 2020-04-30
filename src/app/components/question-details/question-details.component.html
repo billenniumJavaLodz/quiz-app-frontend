@@ -1,0 +1,17 @@
+<div class="content">
+  <div class="question">
+    <h1>Pytanie nr {{question.id}}. Czas na odpowiedź to {{question.timeToAnswer}} sekund.</h1>
+    <div [innerHTML]="question.text"></div>
+  </div>
+  <mat-list role="list">
+    <h1>Odpowiedzi:</h1>
+    <mat-list-item *ngFor="let answer of question.answers" role="listitem">
+      <mat-icon class="mat-icon" mat-list-icon>radio_button_checked</mat-icon>
+      <p [innerHTML]="answer.text" mat-line></p>
+    </mat-list-item>
+  </mat-list>
+  <button (click)="getQuestion()" color="warn" mat-flat-button>
+    <!--todo list of questions component -->
+    Powrót do listy
+  </button>
+</div>

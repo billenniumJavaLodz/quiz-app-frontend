@@ -1,7 +1,7 @@
 <div class="content">
   <div class="question">
     <h2 *ngIf="isResponseDefined()"> Pytanie {{response.actualQuestion}}/{{response.numberOfQuestions}}</h2>
-    <h1>{{response.question.text}}</h1>
+    <div [innerHTML]="response.question.text" class="text"></div>
     <h2 class="timer">Czas: {{timeToAnswer}}s</h2>
   </div>
   <mat-radio-group [(ngModel)]="selectedAnswer" class="form">
