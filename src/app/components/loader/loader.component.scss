@@ -1,0 +1,20 @@
+.overlay {
+  position: fixed;
+  display: block;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(8, 8, 8, 0.562);
+  z-index: 99999;
+  .spinner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  ::ng-deep .mat-progress-spinner circle,
+  .mat-spinner circle {
+    stroke: rgb(236, 134, 66) !important;
+  }
+}

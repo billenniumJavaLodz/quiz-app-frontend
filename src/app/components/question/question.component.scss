@@ -1,0 +1,70 @@
+$mat-radio-button-border-color: rgb(99, 158, 89);
+$mat-radio-button-background-color: rgb(99, 158, 89);
+$mat-remove-button-background-color: rgb(244, 67, 54);
+.content {
+	width: 100%;
+	margin-top: 10vh;
+	.question-form {
+		flex: 1 1 auto;
+		display: flex;
+		flex-flow: column;
+		justify-content: center;
+		align-items: center;
+		.mat-flat-button {
+			width: 20vh;
+		}
+		.question-label {
+			margin-bottom: 2vh;
+		}
+		.question-editor {
+			width: 70%;
+			::ng-deep .ck-editor__editable {
+				min-height: 200px;
+			}
+		}
+		.time-label {
+			width: 20%;
+			margin-top: 2vh;
+		}
+		.answers {
+			width: 100%;
+			flex: 1 1 auto;
+			display: flex;
+			flex-flow: column;
+			justify-content: center;
+			align-items: center;
+			.answer-editor {
+				width: 80%;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				display: flex;
+				flex-flow: row;
+				.radio-answer-button {
+					padding-left: 10px;
+					padding-top: 7px;
+					::ng-deep .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+						border-color: $mat-radio-button-border-color !important;
+					}
+					::ng-deep .mat-radio-button.mat-accent .mat-radio-inner-circle {
+						border-color: $mat-radio-button-border-color !important;
+						background-color: $mat-radio-button-background-color !important;
+					}
+					::ng-deep .mat-radio-button.mat-accent .mat-radio-ripple .mat-ripple-element {
+						background-color: $mat-radio-button-border-color !important;
+					}
+				}
+			}
+		}
+		.legend {
+			::ng-deep .mat-list-item-content {
+				padding: 0 0 !important;
+			}
+			.checked-button {
+				color: $mat-radio-button-background-color;
+			}
+			.remove-button {
+				color: $mat-remove-button-background-color;
+			}
+		}
+	}
+}
