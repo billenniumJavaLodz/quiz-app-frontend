@@ -1,0 +1,69 @@
+.content {
+  margin-top: 15vh;
+  .questions {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    mat-expansion-panel {
+      width: 70vw !important;
+
+      ::ng-deep mat-expansion-panel-header {
+        min-height: 7vh !important;
+        height: fit-content !important;
+      }
+
+      .question-text {
+        font-size: 18px;
+        display: inline-block;
+
+        ::ng-deep pre{
+          font-size: 13px;
+          font-family: monospace;
+        }
+      }
+
+      .answer-text {
+        font-size: 14px;
+
+        .mat-icon-true {
+          color: green;
+          margin-right: 10px;
+        }
+
+        .mat-icon-false {
+          color: orange;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .add-question {
+      margin: 10px;
+    }
+
+    .page-info {
+      margin: 10px;
+      ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+        background-color: rgba(0, 0, 0, 0);
+      }
+
+      ::ng-deep .mat-form-field-infix {
+        width: 3vw;
+      }
+    }
+  }
+  .page-navigation {
+    padding-top: 2vh;
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    
+    .page-button {
+      margin: 7px;
+    }
+  }
+}

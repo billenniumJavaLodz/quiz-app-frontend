@@ -1,15 +1,22 @@
 .content {
-	width: 100%;
 	margin-top: 15vh;
 	font-size: 16px;
 
-	.mat-icon {
+	.mat-icon-true {
+		color: green;
+		margin-right: 10px;
+	}
+	.mat-icon-false {
 		color: orange;
 		margin-right: 10px;
 	}
 
 	::ng-deep .mat-list-item-content .mat-list-text {
 		padding-top: 10px;
+	}
+	::ng-deep pre {
+		background-color: #c7c7c74d;
+		font-size: 13px;
 	}
 
 	.mat-flat-button {

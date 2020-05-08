@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionDetailsComponent } from './components/question-details/question-details.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { QuestionListComponent } from './components/question-list/question-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import { LoaderComponent } from './components/loader/loader.component';
     QuestionComponent,
     QuestionDetailsComponent,
     LoaderComponent,
+    QuestionListComponent,
   ],
   imports: [
     BrowserModule,

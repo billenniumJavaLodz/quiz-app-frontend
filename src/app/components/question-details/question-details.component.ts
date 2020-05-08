@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { QuestionModel } from 'src/app/models/question-model';
 import { QuestionService } from 'src/app/service/question.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { QuestionDetailsModel } from 'src/app/models/question-detiails-model';
 
 @Component({
   selector: 'app-question-details',
@@ -11,24 +11,30 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class QuestionDetailsComponent implements OnInit {
 
   constructor(private questionService: QuestionService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
-   question: QuestionModel;
+  question: QuestionDetailsModel;
 
   ngOnInit(): void {
-      this.initQuestion();
-      this.getQuestion();
+    this.initQuestion();
+    this.getQuestion();
 
   }
-  initQuestion(){
-    this.question = new QuestionModel();
+  initQuestion() {
+    this.question = new QuestionDetailsModel();
   }
 
-  getQuestion(){
-    this.questionService.getQuestion(Number(this.route.snapshot.paramMap.get('id'))).subscribe(data=>{
+  getQuestion() {
+    this.questionService.getQuestion(Number(this.route.snapshot.paramMap.get('id'))).subscribe(data => {
       this.question = data;
     });
-
+  }
+  deleteQuestion() {
+    //todo deleting question with angaular material  trash icon in html
+  }
+  editQuestion() {
+    //todo create reusable component to editing question
   }
 }
+

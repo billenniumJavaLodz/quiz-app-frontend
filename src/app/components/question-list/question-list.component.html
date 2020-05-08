@@ -1,0 +1,46 @@
+<div class="content">
+  <div class="questions">
+    <h2>Lista wszystkich pytań</h2>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let question of dataSource">
+        <mat-expansion-panel-header class="mat-row" expandedHeight="48px">
+          <span [innerHtml]="question.text" class="question-text"></span>
+          <!-- //todo tooltip and repalce pre tag with [...] -->
+        </mat-expansion-panel-header>
+        <div>
+          <mat-list class="answer-text" role="list">
+            <mat-list-item *ngFor="let answer of question.answers" role="listitem">
+              <mat-icon *ngIf="answer.correctAnswer === true " class="mat-icon-true" mat-list-icon>radio_button_checked
+              </mat-icon>
+              <mat-icon *ngIf="answer.correctAnswer === false " class="mat-icon-false" mat-list-icon>
+                radio_button_checked
+              </mat-icon>
+              <p [innerHTML]="answer.text" mat-line></p>
+            </mat-list-item>
+          </mat-list>
+          <button color="warn" mat-raised-button routerLink="/question/{{question.id}}">Szczegóły</button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="add-question">
+      <button color="warn" mat-mini-fab matTooltip="dodaj pytanie" routerLink="add">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+    <h2 class="page-info">Strona
+      <mat-form-field appearance="fill">
+        <input (keydown.enter)="goToPage($event.target.value-1)" class="page-input" matInput max="{{totalPages}}"
+               min="1" type="number" value="{{pageNumber+1}}">
+      </mat-form-field>
+      /{{totalPages}}
+    </h2>
+  </div>
+  <div class="page-navigation">
+
+    <div *ngFor=" let buttonId of pagesButton(); let page = index">
+      <button (click)="goToPage(buttonId)" [disabled]=" pageNumber+1 === buttonId+1 " class="page-button" color="warn"
+              mat-mini-fab>{{buttonId+1}}
+      </button>
+    </div>
+  </div>
+</div>
