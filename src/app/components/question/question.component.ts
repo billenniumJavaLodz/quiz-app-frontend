@@ -122,4 +122,8 @@ export class QuestionComponent implements OnInit {
 
     return answersTexts.filter(text => text === "").length === 0
   }
+
+  addPhoto(){
+    //todo add photo to question
+  }
 }

@@ -10,6 +10,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatTableModule} from '@angular/material/table'
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [],
@@ -23,7 +25,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatListModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatExpansionModule
   ],
   exports: [
     MatMenuModule,
@@ -34,8 +38,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatInputModule,
     MatListModule,
     MatTooltipModule,
-    MatProgressSpinnerModule
-
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule { }

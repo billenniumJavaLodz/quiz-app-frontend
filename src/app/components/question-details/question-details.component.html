@@ -6,12 +6,14 @@
   <mat-list role="list">
     <h1>Odpowiedzi:</h1>
     <mat-list-item *ngFor="let answer of question.answers" role="listitem">
-      <mat-icon class="mat-icon" mat-list-icon>radio_button_checked</mat-icon>
+      <mat-icon *ngIf="answer.correctAnswer === true " class="mat-icon-true" mat-list-icon>radio_button_checked
+      </mat-icon>
+      <mat-icon *ngIf="answer.correctAnswer === false " class="mat-icon-false" mat-list-icon>radio_button_checked
+      </mat-icon>
       <p [innerHTML]="answer.text" mat-line></p>
     </mat-list-item>
   </mat-list>
-  <button (click)="getQuestion()" color="warn" mat-flat-button>
-    <!--todo list of questions component -->
+  <button color="warn" mat-flat-button routerLink="/question">
     Powrót do listy
   </button>
 </div>
