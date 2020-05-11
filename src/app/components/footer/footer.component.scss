@@ -8,6 +8,7 @@ $footer-toolbar-font-size: 15px;
   font-size: $footer-toolbar-font-size ;
   position: fixed;
   bottom: 0;
+  z-index: 8999;
 
   .content {
     justify-content: center;

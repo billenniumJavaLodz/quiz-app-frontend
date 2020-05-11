@@ -1,11 +1,10 @@
 .main-container {
   width: 80%;
-  margin: 4vh auto 80px;
+  margin: 0 auto 80px;
+  display: flex;
+  justify-content: center;
 
   .content-container {
-    display:flex;
-    justify-content: center;
-    max-width: 1257px
+    max-width: 1257px;
   }
 }
-
