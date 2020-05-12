@@ -1,11 +1,38 @@
 <div class="content">
   <div class="questions">
-    <h2>Lista wszystkich pytań</h2>
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let question of dataSource">
+    <div *ngIf="isButtonsEnabled() === false" class="quiz-title">
+      <mat-form-field>
+        <mat-label>Tytuł Quizu</mat-label>
+        <input [(ngModel)]="quizTitle" matInput placeholder="Np. Java zestaw 1">
+      </mat-form-field>
+    </div>
+    <h2>Lista wszystkich pytań. <h3 *ngIf="isButtonsEnabled() === false">Możesz ustalać kolejność pytań poprzez
+      przeciągniecie.</h3>
+    </h2>
+    <mat-accordion (cdkDropListDropped)="drop($event)" cdkDropList>
+      <mat-expansion-panel (cdkDropListDropped)="drop($event)" (click)="isExpand=false"
+                           *ngFor="let question of dataSource" [cdkDragDisabled]="isDragDisabled()"
+                           [disabled]="isExpand" cdkDrag>
         <mat-expansion-panel-header class="mat-row" expandedHeight="48px">
-          <span [innerHtml]="question.text" class="question-text"></span>
-          <!-- //todo tooltip and repalce pre tag with [...] -->
+          <mat-panel-description *cdkDragPreview>
+            <span [innerHtml]="question.text" class="question-text"></span>
+          </mat-panel-description>
+          <mat-panel-description>
+            <span [innerHtml]="question.text" class="question-text"></span>
+            <!-- //todo tooltip and repalce pre tag with [...] -->
+            <span class="spacer"></span>
+            <div *ngIf="isButtonsEnabled()" class="button-controls">
+              <button (click)="addToList(question)" *ngIf="isInList(question) === false" class="quiz-question-button"
+                      mat-icon-button matTooltip="Dodaj pytanie  do quizu">
+                <mat-icon class="mat-icon-add">add_circle_outline</mat-icon>
+              </button>
+              <button (click)="removeFromList(question)" *ngIf="isInList(question) === true"
+                      class="quiz-question-button"
+                      mat-icon-button matTooltip="Usuń pytanie  z  quizu">
+                <mat-icon class="mat-icon-remove">remove_circle_outline</mat-icon>
+              </button>
+            </div>
+          </mat-panel-description>
         </mat-expansion-panel-header>
         <div>
           <mat-list class="answer-text" role="list">
@@ -22,25 +49,49 @@
         </div>
       </mat-expansion-panel>
     </mat-accordion>
-    <div class="add-question">
-      <button color="warn" mat-mini-fab matTooltip="dodaj pytanie" routerLink="add">
+    <div *ngIf="isButtonsEnabled()" class="add-question">
+      <button color="warn" mat-mini-fab matTooltip="Dodaj  nowe pytanie" routerLink="add">
         <mat-icon>add</mat-icon>
       </button>
     </div>
-    <h2 class="page-info">Strona
+
+    <div *ngIf="isButtonsEnabled()" class="quiz-questions">
+      <button (click)="submitQuestions()" [disabled]="quizQuestions.length <3" class="questions-buttons" color="warn"
+              mat-raised-button>
+        <span matTooltip="Liczba dodanych pytań musi wyności conajmniej 3">Zatwierdź pytania</span>
+      </button>
+      <button (click)="clearQuestionsList()" [disabled]="quizQuestions.length === 0" class="questions-buttons"
+              color="warn"
+              mat-raised-button>
+        Wyczyść listę dodanych pytań
+      </button>
+    </div>
+
+    <h2 *ngIf="isButtonsEnabled()" class="page-info">Strona
       <mat-form-field appearance="fill">
         <input (keydown.enter)="goToPage($event.target.value-1)" class="page-input" matInput max="{{totalPages}}"
                min="1" type="number" value="{{pageNumber+1}}">
       </mat-form-field>
       /{{totalPages}}
     </h2>
-  </div>
-  <div class="page-navigation">
 
+    <div *ngIf="isButtonsEnabled()=== false" class="quiz-buttons">
+      <button (click)="createQuiz()" [disabled]="quizTitle.length <4" class="quiz-button" color="warn"
+              mat-raised-button>
+        <span matTooltip="Stwórz quiz">Stwórz nowy Quiz</span>
+      </button>
+      <button (click)="back()" class="quiz-button" color="warn" mat-raised-button>
+        <span matTooltip="Cofnij"> Cofnij</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="isButtonsEnabled()" class="page-navigation">
     <div *ngFor=" let buttonId of pagesButton(); let page = index">
       <button (click)="goToPage(buttonId)" [disabled]=" pageNumber+1 === buttonId+1 " class="page-button" color="warn"
               mat-mini-fab>{{buttonId+1}}
       </button>
     </div>
   </div>
+
 </div>

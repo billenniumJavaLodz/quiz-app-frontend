@@ -1,24 +1,80 @@
 .content {
   margin-top: 15vh;
+  width: 100%;
   .questions {
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
 
-    mat-expansion-panel {
-      width: 70vw !important;
+    .quiz-questions {
+      margin-bottom: 2vh;
+      display: flex;
+      flex: 1 0 auto;
+      flex-flow: column;
+      .questions-buttons {
+        margin: 10px;
+      }
+    }
 
+    .quiz-title {
+      margin-bottom: 2vh;
+      display: flex;
+      flex: 1 0 auto;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+
+      mat-form-field {
+        width: 50vw;
+        font-size: 20px;
+      }
+
+      ::ng-deep .mat-raised-button {
+        min-width: 20vw;
+      }
+
+      ::ng-deep .mat-focused .mat-form-field-label {
+        color: orange !important;
+      }
+
+      ::ng-deep.mat-form-field-underline {
+        background-color: orange !important;
+      }
+
+      ::ng-deep.mat-form-field-ripple {
+        background-color: orange !important;
+      }
+    }
+
+    mat-expansion-panel {
+      width: 60vw !important;
       ::ng-deep mat-expansion-panel-header {
         min-height: 7vh !important;
         height: fit-content !important;
+      }
+
+      .spacer {
+        flex: 1 1 auto;
+      }
+
+      .button-controls {
+        .quiz-question-button {
+          margin-right: 20px;
+          .mat-icon-add {
+            color: green;
+          }
+          .mat-icon-remove {
+            color: red;
+          }
+        }
       }
 
       .question-text {
         font-size: 18px;
         display: inline-block;
 
-        ::ng-deep pre{
+        ::ng-deep pre {
           font-size: 13px;
           font-family: monospace;
         }
@@ -43,8 +99,21 @@
       margin: 10px;
     }
 
+    .quiz-buttons{
+      margin-top: 20px;
+      display: flex;
+      flex: 1 0 auto;
+      justify-content: center;
+      flex-flow: column;
+
+      .quiz-button{
+        margin-top: 10px;
+      }
+    }
+
     .page-info {
       margin: 10px;
+
       ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
         background-color: rgba(0, 0, 0, 0);
       }
@@ -54,6 +123,7 @@
       }
     }
   }
+
   .page-navigation {
     padding-top: 2vh;
     display: flex;
@@ -61,7 +131,7 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    
+
     .page-button {
       margin: 7px;
     }

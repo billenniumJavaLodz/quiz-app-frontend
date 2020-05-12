@@ -1,10 +1,11 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {QuizDefinitionModel} from "../models/quiz-definition-model";
-import {environment} from "../../environments/environment";
-import {AnswerDto} from "../models/answer-dto";
-import {EndQuizModel} from "../models/end.quiz.model";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { Observable, BehaviorSubject } from "rxjs";
+import { QuizDefinitionModel } from "../models/quiz-definition-model";
+import { environment } from "../../environments/environment";
+import { AnswerDto } from "../models/answer-dto";
+import { EndQuizModel } from "../models/end.quiz.model";
+import { QuizSaveModel } from '../models/quiz-save-model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,7 @@ export class QuizService {
 
   quiz = 'quiz/';
   stopQuiz = 'stop';
+
 
   constructor(public httpClient: HttpClient) {
   }
@@ -27,4 +29,9 @@ export class QuizService {
     endQuizModel.quizId = id;
     return this.httpClient.post(environment.baseUrl + this.quiz + this.stopQuiz, endQuizModel).subscribe();
   }
+
+  createQuiz(quiz:QuizSaveModel):Observable<number>{
+    return this.httpClient.post<number>(environment.baseUrl+this.quiz,quiz);
+  }
+
 }
