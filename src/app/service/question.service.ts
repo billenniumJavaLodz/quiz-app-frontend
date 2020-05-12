@@ -12,7 +12,8 @@ import { QuestionPageModel } from '../models/question-page-model';
 export class QuestionService {
   constructor(private httpClient: HttpClient) { }
 
-  questionUrl = '/question/';
+  private questionUrl = '/question/';
+
 
   addQuestion(question: QuestionToSaveModel): Observable<number> {
     return this.httpClient.post<number>(environment.baseUrl + this.questionUrl, question);
@@ -21,10 +22,14 @@ export class QuestionService {
   getQuestion(id: number): Observable<QuestionDetailsModel> {
     return this.httpClient.get<QuestionDetailsModel>(environment.baseUrl + this.questionUrl + id);
   }
+
   getQuestionPage(pageSize: number, pageNumber: number): Observable<QuestionPageModel> {
     let params = new HttpParams();
     params = params.append('pageSize', String(pageSize));
     params = params.append('pageNumber', String(pageNumber));
-    return this.httpClient.get<QuestionPageModel>(environment.baseUrl+this.questionUrl,{params:params});
+    return this.httpClient.get<QuestionPageModel>(environment.baseUrl + this.questionUrl, { params: params });
   }
+
+
+
 }

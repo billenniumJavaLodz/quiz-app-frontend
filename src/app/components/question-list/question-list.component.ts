@@ -1,7 +1,12 @@
 import { Component, OnInit, SecurityContext } from '@angular/core';
 import { QuestionDetailsModel } from 'src/app/models/question-detiails-model';
 import { QuestionService } from 'src/app/service/question.service';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Route } from '@angular/compiler/src/core';
+import { Router } from '@angular/router';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { QuizService } from 'src/app/service/quiz.service';
+import { QuizSaveModel } from 'src/app/models/quiz-save-model';
+import { QuizQuestionModel } from 'src/app/models/quiz-question-model';
 
 @Component({
   selector: 'app-question-list',
@@ -18,13 +23,24 @@ export class QuestionListComponent implements OnInit {
   pageNumber = this.DEFAULT_PAGE_NUMBER;
   totalPages = Math.ceil(this.totalElements / this.pageSize);
   dataSource: QuestionDetailsModel[];
-  preTagContent= "[...]"
+  preTagContent = "[...]";
+  quizQuestions: QuestionDetailsModel[];
+  isExpand: boolean = false;
+  buttonsEnabled: boolean = true;
+  dragDisabled: boolean = true;
+  quizTitle:string ="";
 
 
-  constructor(private questionService: QuestionService) { }
+  constructor(private questionService: QuestionService,
+    private router: Router,
+    private quizService:QuizService) { }
 
   ngOnInit(): void {
+    this.initQuizQuestions();
     this.getQuestionPage(this.pageSize, this.pageNumber);
+  }
+  initQuizQuestions() {
+    this.quizQuestions = [];
   }
 
   getQuestionPage(pageSize: number, pageNumber: number) {
@@ -105,5 +121,66 @@ export class QuestionListComponent implements OnInit {
 
     }
     return questionHtml.innerHTML;
+  }
+  isInList(question: QuestionDetailsModel) {
+    return this.quizQuestions.some(questionQuiz => questionQuiz.id === question.id)
+  }
+
+  addToList(question: QuestionDetailsModel) {
+    this.isExpand = true;
+    this.quizQuestions.push(question);
+  }
+
+  removeFromList(question: QuestionDetailsModel) {
+    this.isExpand = true;
+    this.quizQuestions.splice(this.quizQuestions.findIndex(item => item === question), 1)
+
+  }
+  clearQuestionsList() {
+    this.quizQuestions = [];
+  }
+
+  submitQuestions() {
+    this.dataSource = this.quizQuestions;
+    this.buttonsEnabled = false;
+    this.dragDisabled = false;
+  }
+
+  drop(question: CdkDragDrop<QuestionDetailsModel[]>) {
+    moveItemInArray(this.quizQuestions, question.previousIndex, question.currentIndex);
+  }
+
+ isButtonsEnabled(){
+    return this.buttonsEnabled;
+  }
+
+  isDragDisabled(){
+    return this.dragDisabled;
+  }
+
+  createQuiz(){
+    let quiz = new QuizSaveModel();
+    quiz.title = this.quizTitle;
+    quiz.questions = this.getQuestions();
+    this.quizService.createQuiz(quiz).subscribe(data=>{
+    });
+    //todo  create quiz info component
+  }
+
+  getQuestions(): QuizQuestionModel[] {
+    let questions = [];
+    this.quizQuestions.forEach( question => {
+      let questionModel = new QuizQuestionModel();
+      questionModel.id = question.id;
+        questions.push(questionModel)
+
+    });
+    return questions;
+  }
+
+  back(){
+    this.getQuestionPage(this.pageSize, this.pageNumber);
+    this.buttonsEnabled = true;
+    this.dragDisabled = true;
   }
 }
