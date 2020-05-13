@@ -20,6 +20,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { QuestionDetailsComponent } from './components/question-details/question-details.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import { QuizListComponent } from './components/quiz-list/quiz-list.component';
+import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { QuestionListComponent } from './components/question-list/question-list.
     QuestionDetailsComponent,
     LoaderComponent,
     QuestionListComponent,
+    QuizListComponent,
+    PageNavigationComponent,
   ],
   imports: [
     BrowserModule,

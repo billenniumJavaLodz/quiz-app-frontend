@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="quiz-list">
+    <h1>Lista testów</h1>
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let quiz of dataSource">
+        <mat-expansion-panel-header class="mat-row" expandedHeight="48px">
+          <mat-panel-description>
+            <span [innerHtml]="quiz.title"></span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="quiz-info">
+          <mat-tab-group class="">
+            <mat-tab label="Czas"><span [innerHtml]="quiz.totalTime"></span> sekund.
+            </mat-tab>
+            <mat-tab label="Ilość pytań"><span [innerHtml]="quiz.numberOfQuestions"></span></mat-tab>
+          </mat-tab-group>
+          <button class="quiz-details-button" color="warn" mat-raised-button
+                  routerLink="/quiz/{{quiz.id}}">Szczegóły
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <app-page-navigation (changePageEmitter)="goToPage($event)" [pageNumber]="pageNumber" [totalPages]="totalPages">
+    </app-page-navigation>
+  </div>
+</div>

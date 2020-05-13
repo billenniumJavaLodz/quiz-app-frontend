@@ -99,41 +99,16 @@
       margin: 10px;
     }
 
-    .quiz-buttons{
+    .quiz-buttons {
       margin-top: 20px;
       display: flex;
       flex: 1 0 auto;
       justify-content: center;
       flex-flow: column;
 
-      .quiz-button{
+      .quiz-button {
         margin-top: 10px;
       }
-    }
-
-    .page-info {
-      margin: 10px;
-
-      ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
-        background-color: rgba(0, 0, 0, 0);
-      }
-
-      ::ng-deep .mat-form-field-infix {
-        width: 3vw;
-      }
-    }
-  }
-
-  .page-navigation {
-    padding-top: 2vh;
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
-    .page-button {
-      margin: 7px;
     }
   }
 }
