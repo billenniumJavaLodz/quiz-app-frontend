@@ -28,12 +28,12 @@ export class QuestionListComponent implements OnInit {
   isExpand: boolean = false;
   buttonsEnabled: boolean = true;
   dragDisabled: boolean = true;
-  quizTitle:string ="";
+  quizTitle: string = "";
 
 
   constructor(private questionService: QuestionService,
     private router: Router,
-    private quizService:QuizService) { }
+    private quizService: QuizService) { }
 
   ngOnInit(): void {
     this.initQuizQuestions();
@@ -65,51 +65,12 @@ export class QuestionListComponent implements OnInit {
     });
   }
 
-  goToPage(page: number) {
-    this.getQuestionPage(this.pageSize, this.checkPageNumeber(page));
+  goToPage($pageNumber: number) {
+    this.pageNumber = $pageNumber;
+    this.getQuestionPage(this.pageSize, this.pageNumber);
   }
 
-  checkPageNumeber(page: number): number {
-    let dataBaseTotalPages = this.totalPages - 1;
 
-    if (page >= this.totalPages) {
-      page = dataBaseTotalPages;
-    }
-
-    if (page < this.DEFAULT_PAGE_NUMBER) {
-      page = this.DEFAULT_PAGE_NUMBER;
-    }
-
-    return page;
-  }
-
-  pagesButton() {
-    let dataBaseTotalPages = this.totalPages - 1;
-
-    if (this.totalPages <= this.MIN_BUUTON_GROUPING) {
-      return this.createButtonArray(this.DEFAULT_PAGE_NUMBER, dataBaseTotalPages);
-    } else {
-      if (this.pageNumber === this.DEFAULT_PAGE_NUMBER) {
-        let thirdQuestion = this.pageNumber + 2;
-        return this.createButtonArray(this.DEFAULT_PAGE_NUMBER, thirdQuestion);
-      } else if (this.pageNumber === dataBaseTotalPages) {
-        return this.createButtonArray(this.totalPages - this.MIN_BUUTON_GROUPING, dataBaseTotalPages);
-      } else {
-        let pageBefore = this.pageNumber - 1;
-        let nextPage = this.pageNumber + 1;
-
-        return this.createButtonArray(pageBefore, nextPage);
-      }
-    }
-  }
-
-  createButtonArray(buttonIdStart: number, buttonIdStop: number) {
-    let array = [];
-    for (let id = buttonIdStart; id <= buttonIdStop; id++) {
-      array.push(id);
-    }
-    return array;
-  }
 
   preTagReplacer(baseHtml: string) {
     let questionHtml = document.createElement("div");
@@ -150,35 +111,35 @@ export class QuestionListComponent implements OnInit {
     moveItemInArray(this.quizQuestions, question.previousIndex, question.currentIndex);
   }
 
- isButtonsEnabled(){
+  isButtonsEnabled() {
     return this.buttonsEnabled;
   }
 
-  isDragDisabled(){
+  isDragDisabled() {
     return this.dragDisabled;
   }
 
-  createQuiz(){
+  createQuiz() {
     let quiz = new QuizSaveModel();
     quiz.title = this.quizTitle;
     quiz.questions = this.getQuestions();
-    this.quizService.createQuiz(quiz).subscribe(data=>{
+    this.quizService.createQuiz(quiz).subscribe(data => {
     });
     //todo  create quiz info component
   }
 
   getQuestions(): QuizQuestionModel[] {
     let questions = [];
-    this.quizQuestions.forEach( question => {
+    this.quizQuestions.forEach(question => {
       let questionModel = new QuizQuestionModel();
       questionModel.id = question.id;
-        questions.push(questionModel)
+      questions.push(questionModel)
 
     });
     return questions;
   }
 
-  back(){
+  back() {
     this.getQuestionPage(this.pageSize, this.pageNumber);
     this.buttonsEnabled = true;
     this.dragDisabled = true;

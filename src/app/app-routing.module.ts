@@ -7,6 +7,7 @@ import { EndQuizComponent } from "./components/end-quiz/end-quiz.component";
 import { QuestionComponent } from "./components/question/question.component"
 import { QuestionDetailsComponent } from './components/question-details/question-details.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,7 @@ const routes: Routes = [
     pathMatch: 'full',
 
   }, {
-    path: 'quiz',
+    path: 'quiz/play',
     component: QuizPageComponent,
     pathMatch: 'full',
 
@@ -32,9 +33,14 @@ const routes: Routes = [
     component: QuestionDetailsComponent,
     pathMatch: 'full'
   }, {
-      path: "question",
-      component: QuestionListComponent,
-      pathMatch: 'full'
+    path: "question",
+    component: QuestionListComponent,
+    pathMatch: 'full'
+  }
+  , {
+    path: "quiz",
+    component: QuizListComponent,
+    pathMatch: 'full'
   }, {
     path: '**',
     component: PageNotFoundComponent,
@@ -44,7 +50,7 @@ const routes: Routes = [
   ;
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{
+  imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'enabled'
   })],
   exports: [RouterModule]

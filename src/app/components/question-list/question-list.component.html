@@ -27,8 +27,7 @@
                 <mat-icon class="mat-icon-add">add_circle_outline</mat-icon>
               </button>
               <button (click)="removeFromList(question)" *ngIf="isInList(question) === true"
-                      class="quiz-question-button"
-                      mat-icon-button matTooltip="Usuń pytanie  z  quizu">
+                      class="quiz-question-button" mat-icon-button matTooltip="Usuń pytanie  z  quizu">
                 <mat-icon class="mat-icon-remove">remove_circle_outline</mat-icon>
               </button>
             </div>
@@ -61,19 +60,10 @@
         <span matTooltip="Liczba dodanych pytań musi wyności conajmniej 3">Zatwierdź pytania</span>
       </button>
       <button (click)="clearQuestionsList()" [disabled]="quizQuestions.length === 0" class="questions-buttons"
-              color="warn"
-              mat-raised-button>
+              color="warn" mat-raised-button>
         Wyczyść listę dodanych pytań
       </button>
     </div>
-
-    <h2 *ngIf="isButtonsEnabled()" class="page-info">Strona
-      <mat-form-field appearance="fill">
-        <input (keydown.enter)="goToPage($event.target.value-1)" class="page-input" matInput max="{{totalPages}}"
-               min="1" type="number" value="{{pageNumber+1}}">
-      </mat-form-field>
-      /{{totalPages}}
-    </h2>
 
     <div *ngIf="isButtonsEnabled()=== false" class="quiz-buttons">
       <button (click)="createQuiz()" [disabled]="quizTitle.length <4" class="quiz-button" color="warn"
@@ -86,12 +76,9 @@
     </div>
   </div>
 
-  <div *ngIf="isButtonsEnabled()" class="page-navigation">
-    <div *ngFor=" let buttonId of pagesButton(); let page = index">
-      <button (click)="goToPage(buttonId)" [disabled]=" pageNumber+1 === buttonId+1 " class="page-button" color="warn"
-              mat-mini-fab>{{buttonId+1}}
-      </button>
-    </div>
+  <div *ngIf="isButtonsEnabled()">
+    <app-page-navigation (changePageEmitter)="goToPage($event)" [pageNumber]="pageNumber" [totalPages]="totalPages">
+    </app-page-navigation>
   </div>
 
 </div>

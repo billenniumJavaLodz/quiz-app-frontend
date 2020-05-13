@@ -1,0 +1,17 @@
+<div class="page-info">
+  <h2>Strona
+    <mat-form-field appearance="fill">
+      <input (keydown.enter)="goToPage($event.target.value-1)" [(ngModel)]="pageFrontNumber" class="page-input" matInput
+             max="{{totalPages}}"
+             min="1" type="number" value="{{pageNumber+1}}">
+    </mat-form-field>
+    /{{totalPages}}
+  </h2>
+</div>
+<div class="page-navigation">
+  <div *ngFor=" let buttonId of pagesButton(); let page = index">
+    <button (click)="goToPage(buttonId)" [disabled]=" pageNumber+1 === buttonId+1 " class="page-button" color="warn"
+            mat-mini-fab>{{buttonId+1}}
+    </button>
+
+  </div>
