@@ -7,11 +7,6 @@
         align-items: center;
 
         mat-expansion-panel {
-            width: 60vw !important;
-            ::ng-deep mat-expansion-panel-header {
-                min-height: 7vh !important;
-                height: fit-content !important;
-            }
             .quiz-info {
                 font-size: 16px;
                 padding-top: 10px;

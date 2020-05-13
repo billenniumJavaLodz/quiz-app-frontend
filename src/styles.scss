@@ -26,3 +26,21 @@ pre{
   font-family: monospace;
 }
 
+.mat-icon-true {
+  color: green;
+  margin-right: 10px;
+}
+.mat-icon-false {
+  color: orange;
+  margin-right: 10px;
+}
+
+mat-expansion-panel {
+  width: 60vw !important;
+
+  mat-expansion-panel-header {
+    min-height: 8vh !important;
+    height: fit-content !important;
+  }
+
+}

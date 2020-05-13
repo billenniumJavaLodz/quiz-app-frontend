@@ -1,0 +1,33 @@
+<div class="content">
+  <div class="quiz">
+    <h1>Test: {{quiz.title}}.</h1>
+    <h1>Calkowity czas na roziwązanie to {{quiz.totalTime}} sekund.</h1>
+    <h1>Ilość pytań: {{quiz.numberOfQuestions}}</h1>
+  </div>
+  <div class="answers">
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let question of quiz.questions">
+        <mat-expansion-panel-header class="mat-row" expandedHeight="48px">
+          <mat-panel-description>
+            <span [innerHtml]="question.text"></span>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div>
+          <mat-list role="list">
+            <mat-list-item *ngFor="let answer of question.answers" role="listitem">
+              <mat-icon *ngIf="answer.correctAnswer === true " class="mat-icon-true" mat-list-icon>radio_button_checked
+              </mat-icon>
+              <mat-icon *ngIf="answer.correctAnswer === false " class="mat-icon-false" mat-list-icon>
+                radio_button_checked
+              </mat-icon>
+              <p [innerHTML]="answer.text" mat-line></p>
+            </mat-list-item>
+          </mat-list>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+  <button color="warn" mat-flat-button routerLink="/quiz">
+    Powrót do listy
+  </button>
+</div>
