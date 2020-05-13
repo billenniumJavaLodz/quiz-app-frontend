@@ -7,6 +7,7 @@ import { AnswerDto } from "../models/answer-dto";
 import { EndQuizModel } from "../models/end.quiz.model";
 import { QuizSaveModel } from '../models/quiz-save-model';
 import { QuizPageModel } from '../models/quiz-page-model';
+import { QuizDetailsModel } from '../models/quiz-details-model';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +41,10 @@ export class QuizService {
     params = params.append('pageSize', String(pageSize));
     params = params.append('pageNumber', String(pageNumber));
     return this.httpClient.get<QuizPageModel>(environment.baseUrl + this.quiz, { params: params });
+  }
+
+  getQuiz(id:number):Observable<QuizDetailsModel>{
+    return this.httpClient.get<QuizDetailsModel>(environment.baseUrl+this.quiz+id);
   }
 
 }

@@ -8,6 +8,7 @@ import { QuestionComponent } from "./components/question/question.component"
 import { QuestionDetailsComponent } from './components/question-details/question-details.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
+import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   , {
     path: "quiz",
     component: QuizListComponent,
+    pathMatch: 'full'
+  }, {
+    path: "quiz/:id",
+    component: QuizDetailsComponent,
     pathMatch: 'full'
   }, {
     path: '**',

@@ -48,12 +48,6 @@
     }
 
     mat-expansion-panel {
-      width: 60vw !important;
-      ::ng-deep mat-expansion-panel-header {
-        min-height: 7vh !important;
-        height: fit-content !important;
-      }
-
       .spacer {
         flex: 1 1 auto;
       }
@@ -82,16 +76,6 @@
 
       .answer-text {
         font-size: 14px;
-
-        .mat-icon-true {
-          color: green;
-          margin-right: 10px;
-        }
-
-        .mat-icon-false {
-          color: orange;
-          margin-right: 10px;
-        }
       }
     }
 

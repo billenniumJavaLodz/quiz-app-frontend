@@ -7,6 +7,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { QuizService } from 'src/app/service/quiz.service';
 import { QuizSaveModel } from 'src/app/models/quiz-save-model';
 import { QuizQuestionModel } from 'src/app/models/quiz-question-model';
+import { ParserService } from 'src/app/service/parser.service';
 
 @Component({
   selector: 'app-question-list',
@@ -23,7 +24,6 @@ export class QuestionListComponent implements OnInit {
   pageNumber = this.DEFAULT_PAGE_NUMBER;
   totalPages = Math.ceil(this.totalElements / this.pageSize);
   dataSource: QuestionDetailsModel[];
-  preTagContent = "[...]";
   quizQuestions: QuestionDetailsModel[];
   isExpand: boolean = false;
   buttonsEnabled: boolean = true;
@@ -33,7 +33,8 @@ export class QuestionListComponent implements OnInit {
 
   constructor(private questionService: QuestionService,
     private router: Router,
-    private quizService: QuizService) { }
+    private quizService: QuizService,
+    private parserService: ParserService) { }
 
   ngOnInit(): void {
     this.initQuizQuestions();
@@ -57,7 +58,7 @@ export class QuestionListComponent implements OnInit {
 
       data.questions.forEach(question => {
         if (question.text.includes("pre"))
-          question.text = this.preTagReplacer(question.text);
+          question.text = this.parserService.preTagReplacer(question.text);
       })
 
       this.dataSource = data.questions;
@@ -72,17 +73,6 @@ export class QuestionListComponent implements OnInit {
 
 
 
-  preTagReplacer(baseHtml: string) {
-    let questionHtml = document.createElement("div");
-    questionHtml.innerHTML = baseHtml;
-
-    for (let pre = 0; pre < questionHtml.getElementsByTagName("pre").length; pre++) {
-      questionHtml.getElementsByTagName("pre")[pre]
-        .innerHTML = this.preTagContent;
-
-    }
-    return questionHtml.innerHTML;
-  }
   isInList(question: QuestionDetailsModel) {
     return this.quizQuestions.some(questionQuiz => questionQuiz.id === question.id)
   }

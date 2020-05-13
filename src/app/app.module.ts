@@ -22,6 +22,7 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
+import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { PageNavigationComponent } from './components/page-navigation/page-navig
     QuestionListComponent,
     QuizListComponent,
     PageNavigationComponent,
+    QuizDetailsComponent,
   ],
   imports: [
     BrowserModule,
