@@ -1,13 +1,14 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
+import { Component, OnInit, SecurityContext, ViewChild } from '@angular/core';
 import { QuestionDetailsModel } from 'src/app/models/question-detiails-model';
 import { QuestionService } from 'src/app/service/question.service';
 import { Route } from '@angular/compiler/src/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { QuizService } from 'src/app/service/quiz.service';
 import { QuizSaveModel } from 'src/app/models/quiz-save-model';
 import { QuizQuestionModel } from 'src/app/models/quiz-question-model';
 import { ParserService } from 'src/app/service/parser.service';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-question-list',
@@ -26,17 +27,22 @@ export class QuestionListComponent implements OnInit {
   dataSource: QuestionDetailsModel[];
   quizQuestions: QuestionDetailsModel[];
   isExpand: boolean = false;
-  buttonsEnabled: boolean = true;
-  dragDisabled: boolean = true;
+  isButtonsEnabled: boolean = false;
+  isQuizAdding: boolean = false;
+  isDragDisabled: boolean = true;
+  isExpandedAll: boolean = false;
   quizTitle: string = "";
 
+  @ViewChild('accordion', { static: true }) Accordion: MatAccordion
 
   constructor(private questionService: QuestionService,
     private router: Router,
     private quizService: QuizService,
-    private parserService: ParserService) { }
+    private parserService: ParserService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.checkPath();
     this.initQuizQuestions();
     this.getQuestionPage(this.pageSize, this.pageNumber);
   }
@@ -71,8 +77,6 @@ export class QuestionListComponent implements OnInit {
     this.getQuestionPage(this.pageSize, this.pageNumber);
   }
 
-
-
   isInList(question: QuestionDetailsModel) {
     return this.quizQuestions.some(questionQuiz => questionQuiz.id === question.id)
   }
@@ -85,28 +89,21 @@ export class QuestionListComponent implements OnInit {
   removeFromList(question: QuestionDetailsModel) {
     this.isExpand = true;
     this.quizQuestions.splice(this.quizQuestions.findIndex(item => item === question), 1)
-
   }
+
   clearQuestionsList() {
     this.quizQuestions = [];
   }
 
   submitQuestions() {
     this.dataSource = this.quizQuestions;
-    this.buttonsEnabled = false;
-    this.dragDisabled = false;
+    this.isQuizAdding = true;
+    this.isButtonsEnabled = false;
+    this.isDragDisabled = false;
   }
 
   drop(question: CdkDragDrop<QuestionDetailsModel[]>) {
     moveItemInArray(this.quizQuestions, question.previousIndex, question.currentIndex);
-  }
-
-  isButtonsEnabled() {
-    return this.buttonsEnabled;
-  }
-
-  isDragDisabled() {
-    return this.dragDisabled;
   }
 
   createQuiz() {
@@ -115,7 +112,6 @@ export class QuestionListComponent implements OnInit {
     quiz.questions = this.getQuestions();
     this.quizService.createQuiz(quiz).subscribe(data => {
     });
-    //todo  create quiz info component
   }
 
   getQuestions(): QuizQuestionModel[] {
@@ -131,7 +127,26 @@ export class QuestionListComponent implements OnInit {
 
   back() {
     this.getQuestionPage(this.pageSize, this.pageNumber);
-    this.buttonsEnabled = true;
-    this.dragDisabled = true;
+    this.isButtonsEnabled = true;
+    this.isQuizAdding = false;
+    this.isDragDisabled = true;
+  }
+  checkPath() {
+
+    if (this.router.url.includes("quiz")) {
+      this.isButtonsEnabled = true;
+    } else {
+      this.isButtonsEnabled = false;
+    }
+  }
+
+  expand() {
+    this.Accordion.openAll();
+    this.isExpandedAll = true;
+  }
+
+  shrink() {
+    this.Accordion.closeAll();
+    this.isExpandedAll = false;
   }
 }

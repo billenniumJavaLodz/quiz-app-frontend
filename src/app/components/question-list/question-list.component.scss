@@ -1,6 +1,9 @@
 .content {
   margin-top: 15vh;
   width: 100%;
+  .expaned-controll{
+    margin-bottom: 20px;
+  }
   .questions {
     display: flex;
     flex-flow: column;
@@ -84,12 +87,12 @@
     }
 
     .quiz-buttons {
-      margin-top: 20px;
       display: flex;
       flex: 1 0 auto;
       justify-content: center;
       flex-flow: column;
-
+      margin-top: 20px;
+      
       .quiz-button {
         margin-top: 10px;
       }
