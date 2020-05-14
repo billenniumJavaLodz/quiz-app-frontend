@@ -9,13 +9,11 @@
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="quiz-info">
-          <mat-tab-group class="">
-            <mat-tab label="Czas"><span [innerHtml]="quiz.totalTime"></span> sekund.
-            </mat-tab>
-            <mat-tab label="Ilość pytań"><span [innerHtml]="quiz.numberOfQuestions"></span></mat-tab>
-          </mat-tab-group>
-          <button class="quiz-details-button" color="warn" mat-raised-button
-                  routerLink="/quiz/{{quiz.id}}">Szczegóły
+          Czas trwania: <span [innerHtml]="quiz.totalTime"></span> sekund.
+          <br/>
+          Ilość pytań: <span [innerHtml]="quiz.numberOfQuestions"></span>.
+          <br/>
+          <button class="quiz-details-button" color="warn" mat-raised-button routerLink="/quiz/{{quiz.id}}">Szczegóły
           </button>
         </div>
       </mat-expansion-panel>

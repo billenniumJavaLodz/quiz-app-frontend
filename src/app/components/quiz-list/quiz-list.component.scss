@@ -1,5 +1,10 @@
 .content {
     margin-top: 15vh;
+
+    ::ng-deep .cdk-overlay-pane mat-menu-panel{
+        padding: 200px;;
+    }
+    
     .quiz-list {
         display: flex;
         flex-flow: column;
@@ -10,6 +15,7 @@
             .quiz-info {
                 font-size: 16px;
                 padding-top: 10px;
+                line-height: 3vh;
                 ::ng-deep mat-tab-label {
                     font-size: 16px;
                 }

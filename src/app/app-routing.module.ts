@@ -37,10 +37,13 @@ const routes: Routes = [
     path: "question",
     component: QuestionListComponent,
     pathMatch: 'full'
-  }
-  , {
+  }, {
     path: "quiz",
     component: QuizListComponent,
+    pathMatch: 'full'
+  },{
+    path: "quiz/add",
+    component: QuestionListComponent,
     pathMatch: 'full'
   }, {
     path: "quiz/:id",

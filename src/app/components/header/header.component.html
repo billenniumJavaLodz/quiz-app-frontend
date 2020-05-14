@@ -2,5 +2,32 @@
   <mat-toolbar-row>
     <a href="http://www.billennium.pl"><img src="assets/img/ico/billennium_logo.svg"></a>
     <span class="spacer"></span>
+    <div class="menu">
+
+      <div class="drop-button-container">
+        <button class="drop-button" mat-flat-button>Kandydat</button>
+      </div>
+
+      <div class="drop-button-container">
+        <button class="drop-button" mat-flat-button routerLink='quiz'>Quiz
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <div class="dropdown-content">
+          <button mat-flat-button routerLink='quiz/add'>Dodaj</button>
+          <button mat-flat-button routerLink='quiz'>Lista</button>
+        </div>
+      </div>
+
+      <div class="drop-button-container">
+        <button class="drop-button" mat-flat-button routerLink='question'>Pytania
+          <mat-icon>keyboard_arrow_down
+          </mat-icon>
+        </button>
+        <div class="dropdown-content">
+          <button mat-flat-button routerLink='question/add'>Dodaj</button>
+          <button mat-flat-button routerLink='question'>Lista</button>
+        </div>
+      </div>
+    </div>
   </mat-toolbar-row>
 </mat-toolbar>
