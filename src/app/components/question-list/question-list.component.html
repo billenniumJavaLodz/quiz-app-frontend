@@ -30,14 +30,10 @@
       </button>
     </div>
 
-    <mat-accordion #accordion="matAccordion" (cdkDropListDropped)="drop($event)" [multi]="true" cdkDropList>
-      <mat-expansion-panel (cdkDropListDropped)="drop($event)" (click)="isExpand=false"
-                           *ngFor="let question of dataSource" [cdkDragDisabled]="isDragDisabled" [disabled]="isExpand"
-                           cdkDrag>
+    <mat-accordion #accordion="matAccordion" [multi]="true" cdkDropList>
+      <mat-expansion-panel (click)="isExpand=false"
+                           *ngFor="let question of dataSource" [disabled]="isExpand">
         <mat-expansion-panel-header class="mat-row" expandedHeight="48px">
-          <mat-panel-description *cdkDragPreview>
-            <span [innerHtml]="question.text" class="question-text"></span>
-          </mat-panel-description>
           <mat-panel-description>
             <span [innerHtml]="question.text" class="question-text"></span>
             <!-- //todo tooltip and repalce pre tag with [...] -->

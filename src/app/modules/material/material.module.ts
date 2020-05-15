@@ -14,6 +14,8 @@ import {MatTableModule} from '@angular/material/table'
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 
 @NgModule({
   declarations: [],
@@ -31,7 +33,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatTableModule,
     MatExpansionModule,
     DragDropModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ],
   exports: [
     MatMenuModule,
@@ -46,7 +49,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     MatTableModule,
     MatExpansionModule,
     DragDropModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule { }

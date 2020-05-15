@@ -7,7 +7,15 @@
 		font-size: 13px;
 	}
 
-	.mat-flat-button {
-		margin-top: 10px;
+	.button-container {
+		.mat-flat-button {
+			margin-top: 10px;
+			margin-right: 10px;
+		}
+		.mat-mini-fab {
+			margin-left: 10px;
+			margin-top: 10px;
+		}
 	}
 }
+

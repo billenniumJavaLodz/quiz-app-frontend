@@ -1,8 +1,9 @@
 <div class="content">
   <div class="question">
-    <h1>Pytanie nr {{question.id}}. Czas na odpowiedź to {{question.timeToAnswer}} sekund.</h1>
+    <h1>Pytanie nr {{question.id}}. Czas na odpowiedź to {{question.timeToAnswer}} sekund. </h1>
     <div [innerHTML]="question.text"></div>
   </div>
+
   <mat-list role="list">
     <h1>Odpowiedzi:</h1>
     <mat-list-item *ngFor="let answer of question.answers" role="listitem">
@@ -13,7 +14,12 @@
       <p [innerHTML]="answer.text" mat-line></p>
     </mat-list-item>
   </mat-list>
-  <button color="warn" mat-flat-button routerLink="/question">
-    Powrót do listy
-  </button>
+  <div class="button-container">
+    <button color="warn" mat-mini-fab matTooltip="Wróć do listy pytań" routerLink="/question">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button (click)="deleteQuestion()" color="warn" mat-mini-fab matTooltip="Usuń">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </div>
 </div>

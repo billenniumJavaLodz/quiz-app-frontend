@@ -5,8 +5,6 @@ body {
 
 body {
   margin: 0 auto;
-
-
 }
 
 .billennium-squad-img-container {
@@ -22,7 +20,7 @@ body {
   }
 }
 
-pre{
+pre {
   font-family: monospace;
 }
 
@@ -37,10 +35,20 @@ pre{
 
 mat-expansion-panel {
   width: 60vw !important;
-
+  .mat-expansion-panel-header-description {
+    color: #000;
+  }
   mat-expansion-panel-header {
     min-height: 8vh !important;
     height: fit-content !important;
   }
-
+}
+.mat-snack-bar-container {
+  margin-bottom: 74px !important;
+  background-color: #ff5722;
+  color: white;
+  .mat-simple-snackbar-action {
+    color: white !important;
+    background-color: #f4511e;
+  }
 }
