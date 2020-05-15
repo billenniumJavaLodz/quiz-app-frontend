@@ -102,15 +102,12 @@ export class QuestionListComponent implements OnInit {
     this.isDragDisabled = false;
   }
 
-  drop(question: CdkDragDrop<QuestionDetailsModel[]>) {
-    moveItemInArray(this.quizQuestions, question.previousIndex, question.currentIndex);
-  }
-
   createQuiz() {
     let quiz = new QuizSaveModel();
     quiz.title = this.quizTitle;
     quiz.questions = this.getQuestions();
     this.quizService.createQuiz(quiz).subscribe(data => {
+      this.router.navigateByUrl('/quiz/'+data)
     });
   }
 

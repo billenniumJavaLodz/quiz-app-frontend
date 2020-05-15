@@ -30,6 +30,8 @@ export class QuestionService {
     return this.httpClient.get<QuestionPageModel>(environment.baseUrl + this.questionUrl, { params: params });
   }
 
-
+  deleteQuestion(id:number) :Observable<any>{
+    return this.httpClient.delete<any>(environment.baseUrl+this.questionUrl+id);
+  }
 
 }
