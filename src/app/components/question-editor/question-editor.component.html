@@ -1,0 +1,5 @@
+<div class="content">
+  <app-question-form (sumbitQuestionEmmiter)="submit($event)" *ngIf="formData.id" [formData]="formData"
+                     [isCreating]="isCreating">
+  </app-question-form>
+</div>

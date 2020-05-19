@@ -23,6 +23,8 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { PageNavigationComponent } from './components/page-navigation/page-navigation.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
+import { QuestionFormComponent } from './components/question-form/question-form.component';
+import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { QuizDetailsComponent } from './components/quiz-details/quiz-details.com
     QuizListComponent,
     PageNavigationComponent,
     QuizDetailsComponent,
+    QuestionFormComponent,
+    QuestionEditorComponent,
   ],
   imports: [
     BrowserModule,

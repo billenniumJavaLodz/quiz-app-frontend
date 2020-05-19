@@ -57,7 +57,7 @@ export class QuestionDetailsComponent implements OnInit {
 
   }
   editQuestion() {
-    //todo create reusable component to editing question
+    this.router.navigateByUrl('question/edit/' + this.question.id);
   }
 }
 

@@ -1,0 +1,60 @@
+<div [formGroup]="questionForm" class="question-form">
+  <h1 *ngIf="isCreating"> Dodaj pytanie</h1>
+  <h1 *ngIf="!isCreating"> Aktualizuj pytanie</h1>
+  <mat-label class="question-label">Podaj treść pytania (Minimum {{MIN_QUESTION_TEXT_LENGTH}} znaków).</mat-label>
+  <ckeditor [config]="{ toolbar: [ 'heading', 'codeBlock', '|', 'bold', 'italic', '|', 'Indent'] }" [editor]="editor"
+            class="question-editor" formControlName="text"></ckeditor>
+
+  <mat-form-field class="time-label">
+    <mat-label>Czas na odpowiedź</mat-label>
+    <input formControlName="time" matInput max="11" min="5" type="number">
+    <span matSuffix>sekund</span>
+  </mat-form-field>
+
+  <div class="answers" formArrayName="answers">
+    <h3>Odpowiedzi: </h3>
+
+    <div *ngFor="let answer of answers.controls; let answerId = index" [formGroupName]="answerId" class="row">
+      <div class="answer-editor">
+        <button (click)="removeAnswer(answerId)" color="warn" mat-icon-button matTooltip="Usuń z listy odpowiedzi">
+          <mat-icon>highlight_off</mat-icon>
+        </button>
+        <ckeditor [config]="{ toolbar: [ 'heading', 'codeBlock', '|', 'bold', 'italic', '|', 'Indent'] }"
+                  [editor]="editor"
+                  formControlName="text">
+        </ckeditor>
+        <div class="radio-answer-button">
+          <mat-radio-button (click)="setTrueAnswer(answerId)" [checked]="answers.value[answerId].correctAnswer"
+                            color="accent"
+                            matTooltip="Oznacz jako poprawną" value="checkBox">
+
+          </mat-radio-button>
+        </div>
+      </div>
+    </div>
+    <button (click)="addAnswer()" color="primary" mat-flat-button>Dodaj odpowiedź</button>
+  </div>
+  <div class="legend">
+    <mat-list>
+      <mat-list-item role="listitem">
+        <mat-icon class="checked-button">radio_button_checked</mat-icon>
+        Zaznacz prawidłową odpowiedź poprzez zaznaczenie
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon class="remove-button">highlight_off</mat-icon>
+        Wciśnij aby usunąć z listy
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="form-control">
+    <button (click)="submit()" *ngIf="isCreating" [disabled]="checkQuestion()" color="warn" mat-flat-button>
+      Dodaj pytanie
+    </button>
+    <button (click)="submit()" *ngIf="!isCreating" [disabled]="checkQuestion()" color="warn" mat-flat-button>
+      Zaktualizuj pytanie
+    </button>
+    <button *ngIf="!isCreating" [disabled]="checkQuestion()" color="warn" mat-flat-button routerLink="/question">
+      Anuluj
+    </button>
+  </div>
+</div>
