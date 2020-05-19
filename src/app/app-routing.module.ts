@@ -9,6 +9,7 @@ import { QuestionDetailsComponent } from './components/question-details/question
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
+import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
 
 const routes: Routes = [
   {
@@ -49,7 +50,11 @@ const routes: Routes = [
     path: "quiz/:id",
     component: QuizDetailsComponent,
     pathMatch: 'full'
-  }, {
+  },{
+    path: "question/edit/:id",
+    component: QuestionEditorComponent,
+    pathMatch: 'full'
+  } ,{
     path: '**',
     component: PageNotFoundComponent,
     pathMatch: 'full'
