@@ -1,0 +1,30 @@
+<mat-accordion>
+  <mat-expansion-panel (click)="isExpand = false" *ngFor="let quiz of dataSource" [disabled]="isExpand">
+    <mat-expansion-panel-header class="mat-row" expandedHeight="48px">
+      <div class="quiz-row">
+        <mat-panel-description backgorund-color="red">
+          <span [innerHtml]="quiz.title"></span>
+          <span class="spacer"></span>
+        </mat-panel-description>
+        <button (click)="setQuiz(quiz)" *ngIf="isCandidateQuizButtonsEnabled && quiz !== selectedQuiz"
+                class="quiz-button"
+                mat-icon-button matTooltip="Przypisz quiz">
+          <mat-icon class="mat-icon-add">add</mat-icon>
+        </button>
+        <button *ngIf="isCandidateQuizButtonsEnabled && quiz === selectedQuiz" class="quiz-button" mat-icon-button
+                matTooltip="Wybrany Quiz">
+          <mat-icon class="mat-icon-add">check</mat-icon>
+        </button>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="quiz-info">
+      Czas trwania: <span [innerHtml]="quiz.totalTime"></span> sekund.
+      <br/>
+      Ilość pytań: <span [innerHtml]="quiz.numberOfQuestions"></span>.
+      <br/>
+      <button class="quiz-details-button" color="warn" mat-raised-button routerLink="/quiz/{{quiz.id}}">Szczegóły
+      </button>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

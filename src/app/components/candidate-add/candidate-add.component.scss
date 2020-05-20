@@ -1,0 +1,38 @@
+.content {
+    margin-top: 15vh;
+    .adding-containter {
+        display: flex;
+        flex: 1 0 auto;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        .mat-flat-button {
+            margin-top: 20px;
+        }
+        .candidate-email {
+            margin-bottom: 4vh;
+            mat-form-field {
+                width: 30vw;
+                font-size: 20px;
+            }
+        }
+    }
+    .added-candidates {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        .candidate-table {
+            display: flex;
+            flex: 1 0 auto;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            .mat-column-adress {
+                flex: 0 0 450px;
+            }
+            mat-table {
+                margin-bottom: 20px;
+                min-width: 100%;
+            }
+        }
+    }
+}
