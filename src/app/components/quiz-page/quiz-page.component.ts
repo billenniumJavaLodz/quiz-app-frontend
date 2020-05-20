@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {QuizDefinitionModel} from 'src/app/models/quiz-definition-model';
-import {AnswerDto} from '../../models/answer-dto';
-import {AnswerModel} from '../../models/answer-model';
-import {QuizService} from '../../service/quiz.service';
-import {Router} from '@angular/router';
-import {interval, Subscription} from 'rxjs';
-import {SessionStorageService} from '../../service/session.storage.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { QuizDefinitionModel } from 'src/app/models/quiz-definition-model';
+import { AnswerDto } from '../../models/answer-dto';
+import { AnswerModel } from '../../models/answer-model';
+import { QuizService } from '../../service/quiz.service';
+import { Router } from '@angular/router';
+import { interval, Subscription } from 'rxjs';
+import { SessionStorageService } from '../../service/session.storage.service';
 
 @Component({
   selector: 'app-quiz-page',
@@ -22,8 +22,8 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   timer: Subscription;
 
   constructor(private quizService: QuizService,
-              private router: Router,
-              private sessionStorageService: SessionStorageService) {
+    private router: Router,
+    private sessionStorageService: SessionStorageService) {
   }
 
 
@@ -51,7 +51,9 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.quizService.endQuiz(this.response.id);
+    if (this.response.id !== null) {
+      this.quizService.endQuiz(this.response.id);
+    }
     this.stopTimer();
   }
 

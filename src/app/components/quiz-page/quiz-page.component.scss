@@ -17,9 +17,13 @@
     display: flex;
     flex-direction: column;
     margin: 15px 0;
+    p {
+      margin: 0px auto !important;
+    }
   }
 
   .answer {
     margin: 5px;
   }
 }
+

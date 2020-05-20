@@ -7,7 +7,7 @@
   <mat-radio-group [(ngModel)]="selectedAnswer" class="form">
     <mat-radio-button class="answer" *ngFor="let answer of response.question.answers" [value]="answer"
                       (click)="select(answer)">
-      {{answer.text}}
+     <p [innerHtml]="answer.text"></p>
     </mat-radio-button>
   </mat-radio-group>
   <button (click)="submit(response.question.id,selectedAnswer.id)" *ngIf="isResponseDefined()"

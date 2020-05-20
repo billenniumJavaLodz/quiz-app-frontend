@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {ResultService} from '../../service/result.service';
-import {SessionStorageService} from '../../service/session.storage.service';
-import {ResultModel} from '../../models/result.model';
-import {Router} from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ResultService } from '../../service/result.service';
+import { SessionStorageService } from '../../service/session.storage.service';
+import { ResultModel } from '../../models/result.model';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-end-quiz',
@@ -15,8 +15,8 @@ export class EndQuizComponent implements OnInit {
   score: number;
 
   constructor(private resultService: ResultService,
-              private sessionStorageService: SessionStorageService,
-              private  router: Router) {
+    private sessionStorageService: SessionStorageService,
+    private router: Router) {
   }
 
   ngOnInit(): void {
@@ -25,7 +25,7 @@ export class EndQuizComponent implements OnInit {
     }
     this.resultService.getCandidateResult(this.sessionStorageService.getUUID()).subscribe(data => {
       this.result = data;
-      this.score = (this.result.scoredPoints / this.result.totalPoints) * 100;
+      this.score = Math.round((this.result.scoredPoints / this.result.totalPoints) * 100);
     });
   }
 }

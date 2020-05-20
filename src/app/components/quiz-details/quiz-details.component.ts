@@ -3,6 +3,7 @@ import { QuizService } from 'src/app/service/quiz.service';
 import { QuizDetailsModel } from 'src/app/models/quiz-details-model';
 import { ActivatedRoute } from '@angular/router';
 import { ParserService } from 'src/app/service/parser.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-quiz-details',
@@ -15,7 +16,8 @@ export class QuizDetailsComponent implements OnInit {
 
   constructor(private quizService: QuizService,
     private route: ActivatedRoute,
-    private parserService: ParserService) { }
+    private parserService: ParserService,
+    private location:Location) { }
 
 
   ngOnInit(): void {
@@ -33,5 +35,8 @@ export class QuizDetailsComponent implements OnInit {
     });
   }
 
+  back(){
+    this.location.back();
+  }
 
 }
