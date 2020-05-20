@@ -1,14 +1,16 @@
-import {Injectable} from '@angular/core';
-import {QuizDefinitionModel} from "../models/quiz-definition-model";
+import { Injectable } from '@angular/core';
+import { QuizDefinitionModel } from "../models/quiz-definition-model";
+import { CandidateModel } from '../models/candidate-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SessionStorageService {
-  SESSION_STORAGE_TIMER = 'CANDIDATE_TIMER';
-  SESSION_STORAGE_QUIZ = 'CANDIDATE_QUIZ';
-  SESSION_STORAGE_USER_ID = 'BILLENNIUM_CANDIDATE_ID';
-  SESSION_STORAGE_QUIZ_STATUS = 'CANDIDATE_QUIZ_STATUS';
+  private SESSION_STORAGE_TIMER = 'CANDIDATE_TIMER';
+  private SESSION_STORAGE_QUIZ = 'CANDIDATE_QUIZ';
+  private SESSION_STORAGE_USER_ID = 'BILLENNIUM_CANDIDATE_ID';
+  private SESSION_STORAGE_QUIZ_STATUS = 'CANDIDATE_QUIZ_STATUS';
+  private SESSION_STORAGE_CANDIDATES = "SAVED_CANDIDATES_ARRAY"
 
   setTimer(timerValue: number) {
     sessionStorage.setItem(this.SESSION_STORAGE_TIMER, String(timerValue));
@@ -45,5 +47,13 @@ export class SessionStorageService {
 
   getQuizStatus() {
     return sessionStorage.getItem(this.SESSION_STORAGE_QUIZ_STATUS);
+  }
+
+  setSavedCandidates(candidates: CandidateModel[]) {
+    sessionStorage.setItem(this.SESSION_STORAGE_CANDIDATES, JSON.stringify(candidates))
+  }
+
+  getSavedCandidates() {
+    return sessionStorage.getItem(this.SESSION_STORAGE_CANDIDATES);
   }
 }

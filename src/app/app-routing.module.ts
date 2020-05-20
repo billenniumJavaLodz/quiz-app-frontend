@@ -10,13 +10,18 @@ import { QuestionListComponent } from './components/question-list/question-list.
 import { QuizListComponent } from './components/quiz-list/quiz-list.component';
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
+import { CandidateAddComponent } from './components/candidate-add/candidate-add.component';
 
 const routes: Routes = [
+  
   {
+    path: 'candidate/add',
+    component: CandidateAddComponent,
+    pathMatch: 'full'
+  },{
     path: 'candidate/:id',
     component: HomePageComponent,
     pathMatch: 'full',
-
   }, {
     path: 'quiz/play',
     component: QuizPageComponent,

@@ -25,6 +25,8 @@ import { PageNavigationComponent } from './components/page-navigation/page-navig
 import { QuizDetailsComponent } from './components/quiz-details/quiz-details.component';
 import { QuestionFormComponent } from './components/question-form/question-form.component';
 import { QuestionEditorComponent } from './components/question-editor/question-editor.component';
+import { QuizListPanelComponent } from './components/quiz-list-panel/quiz-list-panel.component';
+import { CandidateAddComponent } from './components/candidate-add/candidate-add.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { QuestionEditorComponent } from './components/question-editor/question-e
     QuizDetailsComponent,
     QuestionFormComponent,
     QuestionEditorComponent,
+    QuizListPanelComponent,
+    CandidateAddComponent,
   ],
   imports: [
     BrowserModule,

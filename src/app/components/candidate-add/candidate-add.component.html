@@ -1,0 +1,54 @@
+<div *ngIf="dataSource" class="content">
+  <div class="adding-containter">
+    <h1>Podaj adres email kandydata:</h1>
+    <div class="candidate-email">
+      <mat-form-field>
+        <mat-label>Kandydat</mat-label>
+        <input [formControl]="email" matInput placeholder="Example@example.com" type="email">
+      </mat-form-field>
+    </div>
+    <h1>Wybierz test dla kandydata:</h1>
+    <app-quiz-list-panel (quizEmitter)="setQuiz($event)" [dataSource]="dataSource"
+                         [isCandidateQuizButtonsEnabled]="true" [selectedQuiz]="quiz">
+    </app-quiz-list-panel>
+    <app-page-navigation (changePageEmitter)="goToPage($event)" [pageNumber]="pageNumber" [totalPages]="totalPages">
+    </app-page-navigation>
+    <button (click)="saveCandidate()" [disabled]="isDisabled()" color="warn" mat-flat-button>Dodaj
+      kandydata
+    </button>
+
+  </div>
+  <div *ngIf="addedCandidates.length > 0" class="added-candidates">
+    <div class="candidate-table">
+      <h1>Dodani kandydaci:</h1>
+      <mat-table [dataSource]="addedCandidatesDataSource" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Adres email</mat-header-cell>
+          <mat-cell *matCellDef="let candidate"> {{candidate.email}}</mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="quiz">
+          <mat-header-cell *matHeaderCellDef> Tytuł testu</mat-header-cell>
+          <mat-cell *matCellDef="let candidate"> {{candidate.quizTitle}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="address">
+          <mat-header-cell *matHeaderCellDef> Adres url</mat-header-cell>
+          <mat-cell *matCellDef="let candidate"> {{url}}{{candidate.id}}
+            <button (click)="copyToClipboard(candidate.id)" mat-icon-button matTooltip="Sopiuj link">
+              <mat-icon>link</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <button (click)="clearAddedCandidates()" color="primary" mat-flat-button>Wyczyść liste dodanych kandydatów
+      </button>
+    </div>
+  </div>
+</div>

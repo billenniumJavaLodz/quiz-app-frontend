@@ -1,0 +1,16 @@
+mat-expansion-panel {
+    .quiz-row {
+        display: flex;
+        flex: 1 1 auto;
+        flex-flow: row;
+        .spacer {
+            flex: 1 1 auto;
+        }
+        .quiz-button {
+            margin-right: 20px;
+            .mat-icon-add {
+                color: green;
+            }
+        }
+    }
+}

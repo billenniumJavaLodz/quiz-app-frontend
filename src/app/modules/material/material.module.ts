@@ -15,7 +15,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [],
@@ -34,7 +35,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatExpansionModule,
     DragDropModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule,
+    ClipboardModule
   ],
   exports: [
     MatMenuModule,
@@ -50,7 +53,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     MatExpansionModule,
     DragDropModule,
     MatTabsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatCheckboxModule,
+    ClipboardModule
   ]
 })
 export class MaterialModule { }
