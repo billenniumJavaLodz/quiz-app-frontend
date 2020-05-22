@@ -1,0 +1,20 @@
+.content {
+    margin-top: 15vh;
+    .quiz-info {
+        display: flex;
+        flex: 1 1 auto;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+
+        h1 {
+            font-size: 28px;
+        }
+    }
+    .result-table {
+        mat-table {
+            margin-bottom: 20px;
+            width: 60vw !important;
+        }
+    }
+}

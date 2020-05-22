@@ -26,12 +26,9 @@
             flex-flow: column;
             justify-content: center;
             align-items: center;
-            .mat-column-adress {
-                flex: 0 0 450px;
-            }
             mat-table {
                 margin-bottom: 20px;
-                min-width: 100%;
+                min-width: 80vw;
             }
         }
     }
