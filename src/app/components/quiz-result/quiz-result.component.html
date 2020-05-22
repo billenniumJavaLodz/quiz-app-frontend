@@ -1,0 +1,44 @@
+<div class="content">
+  <div class="quiz-info">
+    <h1 *ngIf="quiz">Test: {{quiz.title}}</h1>
+  </div>
+
+  <div class="result-table">
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef>Adres email</mat-header-cell>
+        <mat-cell *matCellDef="let candidateResult"> {{candidateResult.email}}
+          <button (click)="copyToClipboard(candidateResult.email)" mat-icon-button matTooltip="Sopiuj a">
+            <mat-icon>link</mat-icon>
+          </button>
+        </mat-cell>
+
+      </ng-container>
+
+      <ng-container matColumnDef="score">
+        <mat-header-cell *matHeaderCellDef>Wynik</mat-header-cell>
+        <mat-cell *matCellDef="let candidateResult">
+          {{candidateResult.scoreInPercentage}}%
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="scoredPoints">
+        <mat-header-cell *matHeaderCellDef>Uzyskane punkty</mat-header-cell>
+        <mat-cell *matCellDef="let candidateResult">
+          {{candidateResult.scoredPoints}} na {{candidateResult.totalPoints}}
+        </mat-cell>
+      </ng-container>
+
+
+      <mat-header-row *matHeaderRowDef="displayColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayColumns;"></mat-row>
+    </mat-table>
+  </div>
+  <button (click)="goBack()" *ngIf="quiz" color="warn" mat-mini-fab matTooltip="Cofnij">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div *ngIf="candidatesArray" class="navigation">
+    <app-page-navigation (changePageEmitter)="goToPage($event)" [pageNumber]="pageNumber" [totalPages]="totalPages">
+    </app-page-navigation>
+  </div>
+</div>

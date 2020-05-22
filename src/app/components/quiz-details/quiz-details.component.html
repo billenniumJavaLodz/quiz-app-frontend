@@ -27,7 +27,12 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-  <button (click)="back()" color="warn" mat-flat-button>
-    Cofnij
-  </button>
+  <div class="navigation">
+    <button (click)="back()" color="warn" mat-mini-fab matTooltip="Cofnij">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button color="warn" mat-flat-button routerLink="/quiz/{{quiz.id}}/result">
+      Lista wyników
+    </button>
+  </div>
 </div>

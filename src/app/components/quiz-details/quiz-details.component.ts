@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { QuizService } from 'src/app/service/quiz.service';
 import { QuizDetailsModel } from 'src/app/models/quiz-details-model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ParserService } from 'src/app/service/parser.service';
 import { Location } from '@angular/common';
 
@@ -17,7 +17,8 @@ export class QuizDetailsComponent implements OnInit {
   constructor(private quizService: QuizService,
     private route: ActivatedRoute,
     private parserService: ParserService,
-    private location:Location) { }
+    private location: Location,
+    private router: Router) { }
 
 
   ngOnInit(): void {
@@ -35,8 +36,15 @@ export class QuizDetailsComponent implements OnInit {
     });
   }
 
-  back(){
+  back() {
+    this.location.subscribe(
+      (path => {
+        if (path.url === this.router.url) {
+          this.location.back();
+        }
+      }));
     this.location.back();
   }
+
 
 }
