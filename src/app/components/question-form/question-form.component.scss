@@ -19,6 +19,26 @@ $mat-remove-button-background-color: rgb(244, 67, 54);
             min-height: 200px;
         }
     }
+    .question-image {
+        margin-top: 20px;
+        position: relative;
+
+        .remove-image-button {
+            display: none;
+            position: absolute;
+
+        }
+    }
+    .question-image:hover .question-photo-container {
+        opacity: 0.4;
+    }
+    .question-image:hover .remove-image-button {
+        top: 0;
+        right: 0;
+        z-index: 9989;
+        display: block;
+    }
+
     .time-label {
         width: 20%;
         margin-top: 2vh;
@@ -29,7 +49,7 @@ $mat-remove-button-background-color: rgb(244, 67, 54);
         display: flex;
         flex-flow: column;
         justify-content: center;
-        align-items: center; 
+        align-items: center;
         max-width: 20vw;
         .answer-editor {
             width: 80%;

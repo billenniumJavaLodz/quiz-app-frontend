@@ -1,7 +1,8 @@
 <div class="content">
   <div class="question">
-    <h1>Pytanie nr {{question.id}}. Czas na odpowiedź to {{question.timeToAnswer}} sekund. </h1>
+    <h2>Pytanie nr {{question.id}}. Czas na odpowiedź to {{question.timeToAnswer}} sekund. </h2>
     <div [innerHTML]="question.text"></div>
+    <img *ngIf="question.image" class="question-photo-container" src="{{'data:image/jpg;base64,' + question.image}}"/>
   </div>
 
   <mat-list role="list">

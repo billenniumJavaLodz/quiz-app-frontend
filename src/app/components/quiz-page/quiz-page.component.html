@@ -2,6 +2,8 @@
   <div class="question">
     <h2 *ngIf="isResponseDefined()"> Pytanie {{response.actualQuestion}}/{{response.numberOfQuestions}}</h2>
     <div [innerHTML]="response.question.text" class="text"></div>
+    <img *ngIf="response.question.image" class="question-photo-container"
+         src="{{'data:image/jpg;base64,' + response.question.image}}"/>
     <h2 class="timer">Czas: {{timeToAnswer}}s</h2>
   </div>
   <mat-radio-group [(ngModel)]="selectedAnswer" class="form">

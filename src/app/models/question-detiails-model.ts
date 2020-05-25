@@ -6,4 +6,5 @@ export class QuestionDetailsModel {
   text: string;
   answers: AnswerDetailsModel[];
   timeToAnswer: number;
+  image: string;
 }

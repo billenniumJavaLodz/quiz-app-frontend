@@ -1,6 +1,6 @@
 .content {
 	margin-top: 15vh;
-	font-size: 16px;
+	font-size: 28px;
 
 	::ng-deep pre {
 		background-color: #c7c7c74d;
@@ -8,6 +8,7 @@
 	}
 
 	.button-container {
+		margin-bottom: 35px;
 		.mat-flat-button {
 			margin-top: 10px;
 			margin-right: 10px;

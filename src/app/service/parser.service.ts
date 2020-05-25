@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ParserService {
-    HTML_REGEX = new RegExp("<[^>]*>", 'g');
-    preTagContent = "[...]";
-    
+  HTML_REGEX = new RegExp("<[^>]*>", 'g');
+  FILE_STAMP_REGEX = new RegExp("^data:image\/[a-z]+;base64,")
+  preTagContent = "[...]";
+
   preTagReplacer(baseHtml: string) {
     let questionHtml = document.createElement("div");
     questionHtml.innerHTML = baseHtml;
@@ -17,5 +18,8 @@ export class ParserService {
 
     }
     return questionHtml.innerHTML;
+  }
+  replaceFileStamp(fileBase64: string) {
+    return fileBase64.replace(this.FILE_STAMP_REGEX, "");
   }
 }
