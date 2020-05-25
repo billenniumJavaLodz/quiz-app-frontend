@@ -1,8 +1,9 @@
 import { AnswerToUpdateModel } from './answer-to-update-model';
 
-export class QuestionToUpdateModel{
-    id:number;
+export class QuestionToUpdateModel {
+    id: number;
     text: string;
     timeToAnswer: number;
     answers: AnswerToUpdateModel[];
+    image: string;
 }

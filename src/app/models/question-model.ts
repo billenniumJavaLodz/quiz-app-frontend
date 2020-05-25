@@ -5,4 +5,5 @@ export class QuestionModel {
   text: string;
   answers: AnswerModel[];
   timeToAnswer: number;
+  image: string;
 }

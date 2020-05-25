@@ -5,6 +5,24 @@
   <ckeditor [config]="{ toolbar: [ 'heading', 'codeBlock', '|', 'bold', 'italic', '|', 'Indent'] }" [editor]="editor"
             class="question-editor" formControlName="text"></ckeditor>
 
+  <mat-form-field *ngIf="image === null" class="time-label">
+    <mat-label>Dodaj zdjęcie</mat-label>
+    <input #fileSelect (change)="addPhoto($event)" [hidden]="true" accept="image/x-png,image/jpeg" type="file">
+
+    <input matInput placeholder="Wybrano " readonly/>
+
+
+    <button (click)="fileSelect.click();" *ngIf="image === null" mat-icon-button matSuffix matTooltip="Wybierz obraz">
+      <mat-icon>file_upload</mat-icon>
+    </button>
+  </mat-form-field>
+  <div *ngIf="image !== null" class="question-image">
+    <button (click)="image = null" *ngIf="image" [matTooltipPosition]="'above'" class="remove-image-button" color="warn"
+            mat-icon-button matSuffix matTooltip="Usuń zdjecie" type="button">
+      <mat-icon>highlight_off</mat-icon>
+    </button>
+    <img class="question-photo-container" src="{{'data:image/jpg;base64,' + image}}">
+  </div>
   <mat-form-field class="time-label">
     <mat-label>Czas na odpowiedź</mat-label>
     <input formControlName="time" matInput max="11" min="5" type="number">
@@ -20,13 +38,11 @@
           <mat-icon>highlight_off</mat-icon>
         </button>
         <ckeditor [config]="{ toolbar: [ 'heading', 'codeBlock', '|', 'bold', 'italic', '|', 'Indent'] }"
-                  [editor]="editor"
-                  formControlName="text">
+                  [editor]="editor" formControlName="text">
         </ckeditor>
         <div class="radio-answer-button">
           <mat-radio-button (click)="setTrueAnswer(answerId)" [checked]="answers.value[answerId].correctAnswer"
-                            color="accent"
-                            matTooltip="Oznacz jako poprawną" value="checkBox">
+                            color="accent" matTooltip="Oznacz jako poprawną" value="checkBox">
 
           </mat-radio-button>
         </div>
@@ -53,7 +69,8 @@
     <button (click)="submit()" *ngIf="!isCreating" [disabled]="checkQuestion()" color="warn" mat-flat-button>
       Zaktualizuj pytanie
     </button>
-    <button *ngIf="!isCreating" [disabled]="checkQuestion()" color="warn" mat-flat-button routerLink="/question">
+    <button *ngIf="!isCreating" [disabled]="checkQuestion()" color="warn" mat-flat-button
+            routerLink="/question/{{formData.id}}">
       Anuluj
     </button>
   </div>

@@ -4,4 +4,5 @@ export class QuestionToSaveModel {
     text: string;
     timeToAnswer: number
     answers: AnswerToSaveModel[];
+    image: string;
 }

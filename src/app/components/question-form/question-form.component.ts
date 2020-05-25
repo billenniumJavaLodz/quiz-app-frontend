@@ -2,9 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import *as Editor from 'cke-editor/build/ckeditor.js';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { QuestionService } from 'src/app/service/question.service';
-import { ActivatedRoute, UrlSegment } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { QuestionToSaveModel } from 'src/app/models/question-to-save-model';
 import { QuestionToUpdateModel } from 'src/app/models/question-to-update-model';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ParserService } from 'src/app/service/parser.service';
 
 @Component({
   selector: 'app-question-form',
@@ -21,8 +23,9 @@ export class QuestionFormComponent implements OnInit {
   HTML_REGEX = new RegExp("<[^>]*>", 'g');
   questionForm: FormGroup;
   trueAnswerId = this.DEFAULT_TRUE_ANSWER_ID;
+  isLoadingImage = false;
   editor = Editor;
-
+  image: string = null;
 
   @Input() formData: any;
   @Input() isCreating: boolean;
@@ -30,7 +33,9 @@ export class QuestionFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private questionService: QuestionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar: MatSnackBar,
+    private parserService: ParserService
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +54,7 @@ export class QuestionFormComponent implements OnInit {
         time: [this.formData.timeToAnswer],
         answers: this.fb.array(this.generateAnswerArray(this.formData.answers))
       });
+      this.image = this.formData.image;
     }
   }
   generateAnswerArray(answers: any[]) {
@@ -117,7 +123,8 @@ export class QuestionFormComponent implements OnInit {
       && this.answers.value.length >= this.MIN_ANSWER_LIST_LENGTH
       && pureText.replace(this.HTML_REGEX, '').length > this.MIN_QUESTION_TEXT_LENGTH
       && this.checkAnswersText()
-      && this.checkAnswersDuplicate()) {
+      && this.checkAnswersDuplicate()
+      && !this.isLoadingImage) {
       return false;
     } else {
       return true;
@@ -141,11 +148,12 @@ export class QuestionFormComponent implements OnInit {
     return this.setFormData(question);
 
   }
-  setFormData(question) {
+  setFormData(question: any) {
     question.id = this.formData.id;
     question.text = this.text;
     question.timeToAnswer = this.timeToAnswer;
     question.answers = new Array();
+    question.image = this.image;
     this.answers.value[this.trueAnswerId].correctAnswer = true;
 
     this.answers.value.forEach(element => {
@@ -161,10 +169,29 @@ export class QuestionFormComponent implements OnInit {
 
   checkAnswersText() {
     let answersTexts = this.answers.value.map((answerText) => answerText.text.replace(this.HTML_REGEX, ''));
-    return answersTexts.filter(text => text === "").length === 0
+    return answersTexts.filter(text => text === "").length === 0;
   }
 
-  addPhoto() {
-    //todo add photo to question
+  addPhoto(img: any) {
+    try {
+      let file = img.target.files[0];
+      if (file.type.includes('png') || file.type.includes('jpeg') || file.type.includes('jpg')) {
+        this.isLoadingImage = true;
+
+        let fReader = new FileReader()
+        fReader.readAsDataURL(file);
+        fReader.onloadend = (event: any) => {
+          this.image = this.parserService.replaceFileStamp(event.target.result);
+          this.isLoadingImage = false;
+        }
+      } else {
+        this.snackBar.open("Niepoprawny format pliku. Dozwolone pliki to: jpg, jpeg, png.", "Zamknij", {
+          duration: 2000
+        });
+      }
+
+    } catch (error) {
+      this.image = null;
+    }
   }
 }
