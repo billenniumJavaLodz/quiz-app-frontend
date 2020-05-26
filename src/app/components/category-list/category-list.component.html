@@ -1,0 +1,11 @@
+<div class="category-list">
+  <mat-form-field>
+    <mat-label>Kategoria</mat-label>
+    <mat-select (selectionChange)="onCategoryChange($event)" disableOptionCentering>
+      <mat-option>Wszytskie</mat-option>
+      <mat-option *ngFor="let categoryName of categories" [value]="categoryName.category">
+        {{categoryName.category}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

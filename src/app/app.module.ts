@@ -28,6 +28,7 @@ import { QuestionEditorComponent } from './components/question-editor/question-e
 import { QuizListPanelComponent } from './components/quiz-list-panel/quiz-list-panel.component';
 import { CandidateAddComponent } from './components/candidate-add/candidate-add.component';
 import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { QuizResultComponent } from './components/quiz-result/quiz-result.compon
     QuizListPanelComponent,
     CandidateAddComponent,
     QuizResultComponent,
+    CategoryListComponent,
   ],
   imports: [
     BrowserModule,

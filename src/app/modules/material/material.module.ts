@@ -17,6 +17,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {ClipboardModule} from '@angular/cdk/clipboard';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -37,7 +38,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     MatTabsModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    ClipboardModule
+    ClipboardModule,
+    MatSelectModule
   ],
   exports: [
     MatMenuModule,
@@ -55,7 +57,8 @@ import {ClipboardModule} from '@angular/cdk/clipboard';
     MatTabsModule,
     MatSnackBarModule,
     MatCheckboxModule,
-    ClipboardModule
+    ClipboardModule,
+    MatSelectModule
   ]
 })
 export class MaterialModule { }

@@ -1,11 +1,22 @@
 <div class="content">
   <div class="questions">
-    <div *ngIf="isQuizAdding" class="quiz-title">
+    <div *ngIf="isQuizAdding && categories" [formGroup]="quizInfoForm" class="quiz-info-input">
+
       <mat-form-field>
-        <mat-label>Tytuł Quizu</mat-label>
-        <input [(ngModel)]="quizTitle" matInput placeholder="Np. Java zestaw 1">
+        <mat-label>Tytuł testu</mat-label>
+        <input formControlName="quizTitle" matInput placeholder="Np. Java zestaw 1">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Kategoria</mat-label>
+        <mat-select disableOptionCentering formControlName="quizCategory" name="category">
+          <mat-option *ngFor="let categoryName of categories" [value]="categoryName.category">
+            {{categoryName.category}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
+
+
     <h2>Lista wszystkich pytań.</h2>
 
 
@@ -68,7 +79,7 @@
       </button>
     </div>
     <div *ngIf="isQuizAdding" class="quiz-buttons">
-      <button (click)="createQuiz()" [disabled]="quizTitle.length <4" class="quiz-button" color="warn"
+      <button (click)="createQuiz()" [disabled]="!quizInfoForm.valid" class="quiz-button" color="warn"
               mat-raised-button>
         <span matTooltip="Stwórz quiz">Stwórz nowy Quiz</span>
       </button>

@@ -1,6 +1,10 @@
 <div class="content">
   <div class="quiz-list">
     <h1>Lista testów</h1>
+    <div class="category-container">
+      <app-category-list (categoryEmmiter)="getCategory($event)" *ngIf="categories" [categories]="categories">
+      </app-category-list>
+    </div>
     <app-quiz-list-panel [dataSource]="dataSource" [isCandidateQuizButtonsEnabled]="false"></app-quiz-list-panel>
     <app-page-navigation (changePageEmitter)="goToPage($event)" [pageNumber]="pageNumber" [totalPages]="totalPages">
     </app-page-navigation>

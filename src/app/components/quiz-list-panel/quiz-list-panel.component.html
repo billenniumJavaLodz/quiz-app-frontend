@@ -6,12 +6,11 @@
           <span [innerHtml]="quiz.title"></span>
           <span class="spacer"></span>
         </mat-panel-description>
-        <button (click)="setQuiz(quiz)" *ngIf="isCandidateQuizButtonsEnabled && quiz !== selectedQuiz"
-                class="quiz-button"
-                mat-icon-button matTooltip="Przypisz quiz">
+        <button (click)="setQuiz(quiz)" *ngIf="isCandidateQuizButtonsEnabled && quiz.id !== selectedQuiz.id"
+                class="quiz-button" mat-icon-button matTooltip="Przypisz quiz">
           <mat-icon class="mat-icon-add">add</mat-icon>
         </button>
-        <button *ngIf="isCandidateQuizButtonsEnabled && quiz === selectedQuiz" class="quiz-button" mat-icon-button
+        <button *ngIf="isCandidateQuizButtonsEnabled && quiz.id === selectedQuiz.id" class="quiz-button" mat-icon-button
                 matTooltip="Wybrany Quiz">
           <mat-icon class="mat-icon-add">check</mat-icon>
         </button>

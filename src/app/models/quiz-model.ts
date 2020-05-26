@@ -3,4 +3,5 @@ export class QuizModel {
     title: string;
     totalTime: number;
     numberOfQuestions: number;
+    category: string;
 }

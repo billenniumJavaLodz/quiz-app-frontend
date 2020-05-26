@@ -9,6 +9,8 @@ import { QuizSaveModel } from 'src/app/models/quiz-save-model';
 import { QuizQuestionModel } from 'src/app/models/quiz-question-model';
 import { ParserService } from 'src/app/service/parser.service';
 import { MatAccordion } from '@angular/material/expansion';
+import { CategoryModel } from 'src/app/models/category.model';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-question-list',
@@ -25,13 +27,20 @@ export class QuestionListComponent implements OnInit {
   pageNumber = this.DEFAULT_PAGE_NUMBER;
   totalPages = Math.ceil(this.totalElements / this.pageSize);
   dataSource: QuestionDetailsModel[];
+  categories: CategoryModel[];
   quizQuestions: QuestionDetailsModel[];
   isExpand: boolean = false;
   isButtonsEnabled: boolean = false;
   isQuizAdding: boolean = false;
   isDragDisabled: boolean = true;
   isExpandedAll: boolean = false;
-  quizTitle: string = "";
+
+  quizInfoForm = new FormGroup({
+    quizCategory: new FormControl(null, Validators.required),
+    quizTitle: new FormControl("",
+      [Validators.required, Validators.minLength(4), Validators.maxLength(255)])
+  });
+
 
   @ViewChild('accordion', { static: true }) Accordion: MatAccordion
 
@@ -45,19 +54,19 @@ export class QuestionListComponent implements OnInit {
     this.checkPath();
     this.initQuizQuestions();
     this.getQuestionPage(this.pageSize, this.pageNumber);
+
   }
+
   initQuizQuestions() {
     this.quizQuestions = [];
   }
 
   getQuestionPage(pageSize: number, pageNumber: number) {
 
-    this.questionService.getQuestionPage(pageSize, pageNumber).subscribe(data => {
-
+    this.questionService.getQuestionPage(String(pageSize), String(pageNumber)).subscribe(data => {
       this.totalElements = data.totalElements;
       this.pageNumber = data.pageNumber;
       this.totalPages = Math.ceil(this.totalElements / this.pageSize);
-
       data.questions.sort(function (questionA, questionB) {
         return questionA.id - questionB.id;
       });
@@ -69,6 +78,12 @@ export class QuestionListComponent implements OnInit {
 
       this.dataSource = data.questions;
       window.scrollTo(0, 0);
+    });
+  }
+
+  getCategory() {
+    this.quizService.getCategories().subscribe(data => {
+      this.categories = data;
     });
   }
 
@@ -96,6 +111,9 @@ export class QuestionListComponent implements OnInit {
   }
 
   submitQuestions() {
+    if (!this.categories) {
+      this.getCategory();
+    }
     this.dataSource = this.quizQuestions;
     this.isQuizAdding = true;
     this.isButtonsEnabled = false;
@@ -104,10 +122,11 @@ export class QuestionListComponent implements OnInit {
 
   createQuiz() {
     let quiz = new QuizSaveModel();
-    quiz.title = this.quizTitle;
+    quiz.title = this.quizInfoForm.get('quizTitle').value;
+    quiz.category = this.quizInfoForm.get('quizCategory').value;
     quiz.questions = this.getQuestions();
     this.quizService.createQuiz(quiz).subscribe(data => {
-      this.router.navigateByUrl('/quiz/'+data)
+      this.router.navigateByUrl('/quiz/' + data)
     });
   }
 
@@ -123,11 +142,13 @@ export class QuestionListComponent implements OnInit {
   }
 
   back() {
+    this.quizInfoForm.reset();
     this.getQuestionPage(this.pageSize, this.pageNumber);
     this.isButtonsEnabled = true;
     this.isQuizAdding = false;
     this.isDragDisabled = true;
   }
+
   checkPath() {
 
     if (this.router.url.includes("quiz")) {
@@ -147,3 +168,4 @@ export class QuestionListComponent implements OnInit {
     this.isExpandedAll = false;
   }
 }
+
