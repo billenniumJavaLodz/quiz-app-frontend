@@ -51,7 +51,9 @@ export class QuizPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.quizService.endQuiz(this.response.id);
+    if (this.response.id !== null) {	   
+      this.quizService.endQuiz(this.response.id);	
+    }
     this.stopTimer();
   }
 

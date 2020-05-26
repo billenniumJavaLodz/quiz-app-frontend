@@ -24,10 +24,11 @@ export class QuestionService {
     return this.httpClient.get<QuestionDetailsModel>(environment.baseUrl + this.questionUrl + id);
   }
 
-  getQuestionPage(pageSize: number, pageNumber: number): Observable<QuestionPageModel> {
+  getQuestionPage(pageSize: string, pageNumber: string): Observable<QuestionPageModel> {
     let params = new HttpParams();
-    params = params.append('pageSize', String(pageSize));
-    params = params.append('pageNumber', String(pageNumber));
+    params = params.append('pageSize', pageSize);
+    params = params.append('pageNumber', pageNumber);
+
     return this.httpClient.get<QuestionPageModel>(environment.baseUrl + this.questionUrl, { params: params });
   }
 

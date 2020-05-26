@@ -59,3 +59,28 @@ mat-expansion-panel {
   max-width: 60vw;
   max-height: 60vh;
 }
+
+
+
+ .mat-raised-button {
+  min-width: 20vw;
+}
+
+ .mat-focused .mat-form-field-label {
+  color: orange !important;
+}
+
+.mat-form-field-underline {
+  background-color: orange !important;
+}
+
+.mat-form-field-ripple {
+  background-color: orange !important;
+}
+
+.category-container {
+  flex-grow: 1;
+  width: 60vw;
+  justify-content: flex-end;
+  display: flex;
+}

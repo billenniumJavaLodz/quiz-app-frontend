@@ -8,14 +8,16 @@ import { EndQuizModel } from "../models/end.quiz.model";
 import { QuizSaveModel } from '../models/quiz-save-model';
 import { QuizPageModel } from '../models/quiz-page-model';
 import { QuizDetailsModel } from '../models/quiz-details-model';
+import { CategoryModel } from '../models/category.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class QuizService {
 
-  quiz = 'quiz/';
-  stopQuiz = 'stop';
+  private quiz = 'quiz/';
+  private category = 'category'
+  private stopQuiz = 'stop';
 
 
   constructor(public httpClient: HttpClient) {
@@ -36,15 +38,19 @@ export class QuizService {
     return this.httpClient.post<number>(environment.baseUrl + this.quiz, quiz);
   }
 
-  getQuizzes(pageSize: number, pageNumber: number): Observable<QuizPageModel> {
+  getQuizzes(pageSize: string, pageNumber: string, category: string): Observable<QuizPageModel> {
     let params = new HttpParams();
-    params = params.append('pageSize', String(pageSize));
-    params = params.append('pageNumber', String(pageNumber));
+    params = params.append('pageSize', pageSize);
+    params = params.append('pageNumber', pageNumber);
+    params = params.append('category', category)
     return this.httpClient.get<QuizPageModel>(environment.baseUrl + this.quiz, { params: params });
   }
 
-  getQuiz(id:number):Observable<QuizDetailsModel>{
-    return this.httpClient.get<QuizDetailsModel>(environment.baseUrl+this.quiz+id);
+  getQuiz(id: number): Observable<QuizDetailsModel> {
+    return this.httpClient.get<QuizDetailsModel>(environment.baseUrl + this.quiz + id);
   }
 
+  getCategories(): Observable<CategoryModel[]> {
+    return this.httpClient.get<CategoryModel[]>(environment.baseUrl + this.quiz + this.category);
+  }
 }

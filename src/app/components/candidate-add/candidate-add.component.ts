@@ -10,6 +10,7 @@ import { QuizModel } from 'src/app/models/quiz-model';
 import { CandidateService } from 'src/app/service/candidate.service';
 import { QuizService } from 'src/app/service/quiz.service';
 import { SessionStorageService } from 'src/app/service/session.storage.service';
+import { CategoryModel } from 'src/app/models/category.model';
 
 @Component({
   selector: 'app-candidate-add',
@@ -25,9 +26,11 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
   pageNumber = this.DEFAULT_PAGE_NUMBER;
   totalPages = Math.ceil(this.totalElements / this.pageSize);
   dataSource: QuizModel[];
-  quiz: QuizModel;
+  categories: CategoryModel[];
+  quiz: QuizModel = new QuizModel();
   candidateUUID: string;
   url = "https://" + window.location.host + "/candidate/";
+  category = "ALL";
 
   email = new FormControl('', [
     Validators.required,
@@ -52,7 +55,8 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getSavedCandidates();
-    this.getQuizzes(this.pageSize, this.pageNumber);
+    this.getQuizzes(this.pageSize, this.pageNumber, this.category);
+    this.getCategories();
   }
 
 
@@ -65,8 +69,8 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
   }
 
 
-  getQuizzes(pageSize: number, pageNumber: number) {
-    this.quizService.getQuizzes(pageSize, pageNumber).subscribe(data => {
+  getQuizzes(pageSize: number, pageNumber: number, category: string) {
+    this.quizService.getQuizzes(String(pageSize), String(pageNumber), category).subscribe(data => {
 
       this.totalElements = data.totalElements;
       this.pageNumber = data.pageNumber;
@@ -78,7 +82,7 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
 
   goToPage($pageNumber: number) {
     this.pageNumber = $pageNumber;
-    this.getQuizzes(this.pageSize, this.pageNumber);
+    this.getQuizzes(this.pageSize, this.pageNumber, this.category);
   }
 
   setQuiz($quiz: QuizModel) {
@@ -86,7 +90,8 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
   }
 
   isDisabled() {
-    return this.quiz === undefined || this.email.invalid;
+
+    return this.quiz.id === undefined || this.email.invalid;
   }
 
   saveCandidate() {
@@ -129,7 +134,7 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
 
   resetForm() {
     this.email.reset();
-    this.quiz = undefined;
+    this.quiz = new QuizModel();
   }
 
   copyToClipboard(id: string) {
@@ -139,9 +144,22 @@ export class CandidateAddComponent implements OnInit, OnDestroy {
     });
   }
 
-  clearAddedCandidates(){
+  clearAddedCandidates() {
     this.sessionStorageService.setSavedCandidates([]);
     this.addedCandidates = [];
     this.addedCandidatesDataSource = new MatTableDataSource();
+  }
+
+  getCategories() {
+    this.quizService.getCategories().subscribe(data => {
+      this.categories = data;
+    });
+  }
+  getCategory(category: string) {
+    this.quiz = new QuizModel();
+    this.pageSize = this.DEFAULT_PAGE_SIZE;
+    this.pageNumber = this.DEFAULT_PAGE_NUMBER;
+    this.category = category;
+    this.getQuizzes(this.pageSize, this.pageNumber, this.category);
   }
 }

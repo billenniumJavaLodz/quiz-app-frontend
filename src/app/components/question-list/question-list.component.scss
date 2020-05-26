@@ -1,7 +1,7 @@
 .content {
   margin-top: 15vh;
   width: 100%;
-  .expaned-controll{
+  .expaned-controll {
     margin-bottom: 20px;
   }
   .questions {
@@ -20,7 +20,7 @@
       }
     }
 
-    .quiz-title {
+    .quiz-info-input {
       margin-bottom: 2vh;
       display: flex;
       flex: 1 0 auto;
@@ -31,22 +31,6 @@
       mat-form-field {
         width: 50vw;
         font-size: 20px;
-      }
-
-      ::ng-deep .mat-raised-button {
-        min-width: 20vw;
-      }
-
-      ::ng-deep .mat-focused .mat-form-field-label {
-        color: orange !important;
-      }
-
-      ::ng-deep.mat-form-field-underline {
-        background-color: orange !important;
-      }
-
-      ::ng-deep.mat-form-field-ripple {
-        background-color: orange !important;
       }
     }
 
@@ -92,7 +76,7 @@
       justify-content: center;
       flex-flow: column;
       margin-top: 20px;
-      
+
       .quiz-button {
         margin-top: 10px;
       }
