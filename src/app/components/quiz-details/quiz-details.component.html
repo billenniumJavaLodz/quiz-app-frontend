@@ -35,5 +35,8 @@
     <button color="warn" mat-flat-button routerLink="/quiz/{{quiz.id}}/result">
       Lista wyników
     </button>
+    <button (click)="deleteQuiz()" color="warn" mat-mini-fab matTooltip="Usuń quiz">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 </div>
