@@ -4,6 +4,7 @@ import { QuizDetailsModel } from 'src/app/models/quiz-details-model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ParserService } from 'src/app/service/parser.service';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-quiz-details',
@@ -13,12 +14,14 @@ import { Location } from '@angular/common';
 export class QuizDetailsComponent implements OnInit {
 
   quiz: QuizDetailsModel;
+  DELETE_SUCCESS = "Pomyślnie usnięto";
 
   constructor(private quizService: QuizService,
     private route: ActivatedRoute,
     private parserService: ParserService,
     private location: Location,
-    private router: Router) { }
+    private router: Router,
+    private snackBar: MatSnackBar) { }
 
 
   ngOnInit(): void {
@@ -46,5 +49,22 @@ export class QuizDetailsComponent implements OnInit {
     this.location.back();
   }
 
+  deleteQuiz() {
+    this.quizService.deleteQuiz(this.quiz.id).subscribe(data => {
+      this.snackBarOpen(this.DELETE_SUCCESS)
+    }, error => {
+      this.snackBarOpen(error.error.message);
+    });
+  }
 
+
+  snackBarOpen(data: string) {
+    this.snackBar.open(data, "Zamknij", {
+      duration: 5000,
+    }).afterDismissed().subscribe(dissmis => {
+      if (data === this.DELETE_SUCCESS) {
+        this.router.navigateByUrl('/quiz');
+      }
+    });
+  }
 }

@@ -53,4 +53,8 @@ export class QuizService {
   getCategories(): Observable<CategoryModel[]> {
     return this.httpClient.get<CategoryModel[]>(environment.baseUrl + this.quiz + this.category);
   }
+
+  deleteQuiz(id: number): Observable<any> {
+    return this.httpClient.delete<any>(environment.baseUrl+this.quiz+id);
+  }
 }
